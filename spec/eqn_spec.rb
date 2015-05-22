@@ -229,4 +229,14 @@ describe Eqn do
       expect(Eqn::Calculator.calc('1 + if(5 > 3, 1, 2)')).to eq(2)
     end
   end
+
+  context 'checks equation validity' do
+    it 'affirms a valid equation' do
+      expect(Eqn::Calculator.valid?('1+1')).to eq(true)
+    end
+
+    it 'rejects an invalid equation' do
+      expect(Eqn::Calculator.valid?('(1)1')).to eq(false)
+    end
+  end
 end
