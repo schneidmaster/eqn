@@ -4,5 +4,6 @@ rvm:
 install:
   - gem uninstall bundler
   - gem install bundler --version '1.8.5'
+  - bundle
 script:
   - bundle exec rspec
