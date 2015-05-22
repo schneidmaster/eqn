@@ -238,5 +238,9 @@ describe Eqn do
     it 'rejects an invalid equation' do
       expect(Eqn::Calculator.valid?('(1)1')).to eq(false)
     end
+
+    it 'does not remove whitespace between numbers' do
+      expect(Eqn::Calculator.valid?('1 1')).to eq(false)
+    end
   end
 end

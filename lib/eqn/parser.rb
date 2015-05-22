@@ -5,14 +5,22 @@ require 'eqn/number'
 require 'eqn/terminal'
 
 module Eqn
+  WHITESPACE_REGEX = /([^0-9]( )+[^0-9])|([^0-9]( )+[0-9])|([0-9]( )+[^0-9])/
+
   class Parser
     # Load the Treetop grammar from the grammar.
     Treetop.load(File.join(File.dirname(__dir__), 'eqn.treetop'))
     @@parser = EqnParser.new
 
     def self.parse(data)
-      # Remove any whitespace and pass the data over to the parser instance
-      tree = @@parser.parse(data.downcase.delete(' '))
+      # Remove any whitespace and pass the data over to the parser instance.
+      data.downcase!
+      while data =~ Eqn::WHITESPACE_REGEX do
+        data = data.downcase.gsub(Eqn::WHITESPACE_REGEX) do
+          Regexp.last_match.to_s.delete(' ')
+        end
+      end
+      tree = @@parser.parse(data)
 
       # Raise any errors.
       if tree.nil?
