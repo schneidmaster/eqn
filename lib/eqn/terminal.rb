@@ -12,8 +12,6 @@ module Eqn
       end
     end
 
-    class Exp < Node; end
-
     class Sign < Node
       def negative?
         text_value == '-'

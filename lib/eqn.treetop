@@ -100,7 +100,7 @@ grammar Eqn
   end
 
   rule exp
-    'e' / 'E' <Eqn::Terminal::Exp>
+    'e' / 'E'
   end
 
   rule sign
