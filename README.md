@@ -31,7 +31,7 @@ You can also check if an equation is valid:
 
     $ Eqn::Calculator.valid?('1 + 1')
     # => true
-    $ Eqn::Calculator.valid?('1 + + 1')
+    $ Eqn::Calculator.valid?('1 + / 1')
     # => false
 
 If you want to peek at how Eqn is parsing an equation, run the following to get the syntax tree:
