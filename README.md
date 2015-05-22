@@ -37,6 +37,8 @@ If you want to peek at how Eqn is parsing an equation, run the following to get 
     $ Eqn::Parser.parse('1 + 1')
     # => <syntax tree is printed>
 
+Eqn follows the standard mathematical order of operations: parentheses, exponentiation, multiplication/division, addition/subtraction. It ignores  whitespace, so `1 + 1` === `1+1`. (However, it does not ignore whitespace between two numbers, so `1 1` is invalid.)
+
 ### Functions
 
 Eqn presently supports four functions:
