@@ -1,0 +1,117 @@
+grammar Eqn
+  rule body
+    function / comparation
+  end
+
+  rule function
+    if_func / round_func / roundup_func / rounddown_func
+  end
+
+  rule if_func
+    'if' '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
+  end
+
+  rule round_func
+    'round' group <Eqn::Function::Round>
+  end
+
+  rule roundup_func
+    'roundup' group <Eqn::Function::RoundUp>
+  end
+
+  rule rounddown_func
+    'rounddown' group <Eqn::Function::RoundDown>
+  end
+
+  rule comparation
+    expression comp_group? <Eqn::Comparation>
+  end
+
+  rule comp_group
+    comp_op expression <Eqn::Comparation::CompGroup>
+  end
+
+  rule expression
+    multitive addsub_group? <Eqn::Expression>
+  end
+
+  rule addsub_group
+    addsub_op expression <Eqn::Expression::ExprGroup>
+  end
+
+  rule multitive
+    exponentiative muldiv_group? <Eqn::Expression>
+  end
+
+  rule muldiv_group
+    muldiv_op multitive <Eqn::Expression::ExprGroup>
+  end
+
+  rule exponentiative
+    operand pow_group? <Eqn::Expression>
+  end
+
+  rule pow_group
+    pow_op exponentiative <Eqn::Expression::ExprGroup>
+  end
+
+  rule operand
+    group / number
+  end
+
+  rule group
+    '(' expression ')' <Eqn::Expression>
+  end
+
+  rule number
+    signed_float exponent? <Eqn::Number>
+  end
+
+  rule signed_float
+    sign? digits decimal? <Eqn::Number::SignedNumber>
+  end
+
+  rule decimal
+    '.' digits <Eqn::Number::Decimal>
+  end
+
+  rule exponent
+    exp signed_float <Eqn::Number::Exponent>
+  end
+
+  rule pow_op
+    '^' <Eqn::Terminal::Op::Pow>
+  end
+
+  rule muldiv_op
+      '*' <Eqn::Terminal::Op::Mul>
+    / '/' <Eqn::Terminal::Op::Div>
+  end
+
+  rule addsub_op
+      '+' <Eqn::Terminal::Op::Add>
+    / '-' <Eqn::Terminal::Op::Sub>
+  end
+
+  rule comp_op
+      '<=' <Eqn::Terminal::CompOp::Lte>
+    / '>=' <Eqn::Terminal::CompOp::Gte>
+    / '<'  <Eqn::Terminal::CompOp::Lt>
+    / '>'  <Eqn::Terminal::CompOp::Gt>
+    / '==' <Eqn::Terminal::CompOp::Eq>
+    / '='  <Eqn::Terminal::CompOp::Eq>
+    / '!=' <Eqn::Terminal::CompOp::Neq>
+  end
+
+  rule exp
+    'e' / 'E' <Eqn::Terminal::Exp>
+  end
+
+  rule sign
+    '+' / '-' <Eqn::Terminal::Sign>
+  end
+
+  rule digits
+    [0-9]+ <Eqn::Terminal::Digits>
+  end
+end
