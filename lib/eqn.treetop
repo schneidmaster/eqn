@@ -1,28 +1,4 @@
 grammar Eqn
-  rule body
-    function / comparation
-  end
-
-  rule function
-    if_func / round_func / roundup_func / rounddown_func
-  end
-
-  rule if_func
-    'if' '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
-  end
-
-  rule round_func
-    'round' group <Eqn::Function::Round>
-  end
-
-  rule roundup_func
-    'roundup' group <Eqn::Function::RoundUp>
-  end
-
-  rule rounddown_func
-    'rounddown' group <Eqn::Function::RoundDown>
-  end
-
   rule comparation
     expression comp_group? <Eqn::Comparation>
   end
@@ -56,7 +32,27 @@ grammar Eqn
   end
 
   rule operand
-    group / number
+    function / group / number
+  end
+
+  rule function
+    if_func / round_func / roundup_func / rounddown_func
+  end
+
+  rule if_func
+    'if' '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
+  end
+
+  rule round_func
+    'round' group <Eqn::Function::Round>
+  end
+
+  rule roundup_func
+    'roundup' group <Eqn::Function::RoundUp>
+  end
+
+  rule rounddown_func
+    'rounddown' group <Eqn::Function::RoundDown>
   end
 
   rule group

@@ -223,5 +223,10 @@ describe Eqn do
       expect(Eqn::Calculator.calc('rounddown(1.5)')).to eq(1)
       expect(Eqn::Calculator.calc('rounddown(1.25)')).to eq(1)
     end
+
+    it 'evaluates function results in mathematical operations' do
+      expect(Eqn::Calculator.calc('if(5 > 3, 1, 2) + 1')).to eq(2)
+      expect(Eqn::Calculator.calc('1 + if(5 > 3, 1, 2)')).to eq(2)
+    end
   end
 end
