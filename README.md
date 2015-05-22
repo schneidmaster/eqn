@@ -25,6 +25,13 @@ To evaluate an equation string, run the following:
     $ Eqn::Calculator.calc('1 + 1')
     # => 2
 
+You can also check if an equation is valid:
+
+    $ Eqn::Calculator.valid?('1 + 1')
+    # => true
+    $ Eqn::Calculator.valid?('1 + + 1')
+    # => false
+
 If you want to peek at how Eqn is parsing an equation, run the following to get the syntax tree:
 
     $ Eqn::Parser.parse('1 + 1')
@@ -44,7 +51,7 @@ For example, `if(5 > 3, 1, 2)` would evaluate to `1`.
 
 Syntax: `round(number)`
 
-Rounds the number up if the decimal is greater than 0.5 and down otherwise (aka "normal" rounding).
+Rounds the number up if the decimal is greater than 0.5 and down otherwise (i.e. "normal" rounding).
 
 **roundup**
 
