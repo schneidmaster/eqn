@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/schneidmaster/eqn.svg?branch=master)](https://travis-ci.org/schneidmaster/eqn)
+
 # Eqn
 
 Eqn uses the Treetop parser generator to safely evaluate mathematical expressions in Ruby.
