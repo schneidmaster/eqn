@@ -15,7 +15,7 @@ module Eqn
     def self.parse(data)
       # Remove any whitespace and pass the data over to the parser instance.
       data.downcase!
-      while data =~ Eqn::WHITESPACE_REGEX do
+      while data =~ Eqn::WHITESPACE_REGEX
         data = data.downcase.gsub(Eqn::WHITESPACE_REGEX) do
           Regexp.last_match.to_s.delete(' ')
         end

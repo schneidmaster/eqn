@@ -247,4 +247,10 @@ describe Eqn do
       expect(Eqn::Calculator.valid?('if(5 > 3, 1, 2) 2')).to eq(false)
     end
   end
+
+  context 'division by zero' do
+    it 'throws exception' do
+      expect { Eqn::Calculator.calc('1 / 0') }.to raise_error(ZeroDivisionError)
+    end
+  end
 end

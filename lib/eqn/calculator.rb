@@ -2,7 +2,9 @@ module Eqn
   class Calculator
     class << self
       def calc(data)
-        Parser.parse(data).value
+        result = Parser.parse(data).value
+        fail ZeroDivisionError if result == Float::INFINITY
+        result
       end
 
       def valid?(data)
