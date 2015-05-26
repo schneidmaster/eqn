@@ -3,7 +3,7 @@ module Eqn
     class << self
       def calc(data)
         result = Parser.parse(data).value
-        fail ZeroDivisionError if result == Float::INFINITY
+        fail ZeroDivisionError if result.is_a?(Float) && result.abs == Float::INFINITY
         result
       end
 

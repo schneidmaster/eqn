@@ -251,6 +251,7 @@ describe Eqn do
   context 'division by zero' do
     it 'throws exception' do
       expect { Eqn::Calculator.calc('1 / 0') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
     end
   end
 end
