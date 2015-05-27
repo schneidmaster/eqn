@@ -75,6 +75,10 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 The gem uses rspec for testing; run `rspec` from the application root to execute the tests.
 
+## Authorship
+
+Written by Zach Schneider for [Aha!, the world's #1 product roadmap software](http://www.aha.io/)
+
 ## Contributing
 
 1. Fork it ( https://github.com/schneidmaster/eqn/fork )
