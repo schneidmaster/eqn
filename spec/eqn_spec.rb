@@ -68,6 +68,12 @@ describe Eqn do
     it 'parses a negative float with no leading number' do
       expect(Eqn::Calculator.calc('-.1')).to eq(-0.1)
     end
+    it 'parses a positive exponent with no leading number' do
+      expect(Eqn::Calculator.calc('.1e.1')).to eq(0.12589254117941673)
+    end
+    it 'parses a negative exponent with no leading number' do
+      expect(Eqn::Calculator.calc('.1e-.1')).to eq(0.07943282347242815)
+    end
   end
 
   context 'performs basic arithmetic' do
@@ -245,23 +251,49 @@ describe Eqn do
     it 'rejects an invalid equation' do
       expect(Eqn::Calculator.valid?('(1)1')).to eq(false)
     end
+  end
 
-    it 'does not remove whitespace between numbers' do
+  context 'appropriately handles whitespace' do
+    it 'ignores whitespace in an equation' do
+      expect(Eqn::Calculator.valid?(' 1 + ( 1 + 2 ) ')).to eq(true)
+    end
+
+    it 'ignores arbitrarily large whitespace' do
+      expect(Eqn::Calculator.valid?('     1.5 + 3     ')).to eq(true)
+    end
+
+    it 'ignores tabs' do
+      expect(Eqn::Calculator.valid?("\t1.5\t+\t3\t")).to eq(true)
+    end
+
+    it 'ignores tabs with spaces' do
+      expect(Eqn::Calculator.valid?("\t\s1.5\s\t+\t\s3\s\t")).to eq(true)
+    end
+
+    it 'does not ignore whitespace between numbers' do
       expect(Eqn::Calculator.valid?('1 1')).to eq(false)
+      expect { Eqn::Calculator.calc('1 1') }.to raise_error(ParseError)
     end
 
-    it 'does not remove whitespace between numbers and decimals' do
+    it 'does not ignore whitespace between numbers and decimals' do
       expect(Eqn::Calculator.valid?('1 .1')).to eq(false)
+      expect { Eqn::Calculator.calc('1 .1') }.to raise_error(ParseError)
     end
 
-    it 'does not remove whitespace between groups and numbers' do
+    it 'does not ignore whitespace between groups and numbers' do
       expect(Eqn::Calculator.valid?('if(5 > 3, 1, 2) 2')).to eq(false)
+      expect { Eqn::Calculator.calc('if(5 > 3, 1, 2) 2') }.to raise_error(ParseError)
     end
   end
 
   context 'division by zero' do
-    it 'throws exception' do
-      expect { Eqn::Calculator.calc('1 / 0') }.to raise_error(ZeroDivisionError)
+    it 'throws exception for positive division by zero' do
+      expect(Eqn::Calculator.valid?('1 / 0')).to eq(false)
+      expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
+    end
+
+    it 'throws exception for negative division by zero' do
+      expect(Eqn::Calculator.valid?('-1 / 0')).to eq(false)
       expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
     end
   end

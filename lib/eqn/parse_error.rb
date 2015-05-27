@@ -1,0 +1,1 @@
+class ParseError < StandardError; end

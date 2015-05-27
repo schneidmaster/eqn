@@ -2,32 +2,23 @@ require 'eqn/function'
 require 'eqn/comparation'
 require 'eqn/expression'
 require 'eqn/number'
+require 'eqn/parse_error'
 require 'eqn/terminal'
 
 module Eqn
-  WHITESPACE_REGEX = /([^0-9]( )+[^0-9|.])|([^0-9]( )+[0-9|.])|([0-9]( )+[^0-9|.])/
-
   class Parser
     # Load the Treetop grammar from the grammar.
     Treetop.load(File.join(File.dirname(__dir__), 'eqn.treetop'))
     @@parser = EqnParser.new
 
     def self.parse(data)
-      # Remove any whitespace and pass the data over to the parser instance.
-      data.downcase!
-      while data =~ Eqn::WHITESPACE_REGEX
-        data = data.downcase.gsub(Eqn::WHITESPACE_REGEX) do
-          Regexp.last_match.to_s.delete(' ')
-        end
-      end
-      tree = @@parser.parse(data)
+      # Pass the data over to the parser instance.
+      tree = @@parser.parse(data.downcase)
 
       # Raise any errors.
-      if tree.nil?
-        fail Exception, "Parse error at offset: #{@@parser.index}" + @@parser.failure_reason
-      end
+      fail ParseError, "Parse error at offset: #{@@parser.index}" + @@parser.failure_reason if tree.nil?
 
-      # Remove extraneous nodes and return the tree.
+      # Remove extraneous nodes and return tree.
       clean_tree(tree)
     end
 

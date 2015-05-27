@@ -9,6 +9,7 @@ module Eqn
       base
     end
 
+    # rubocop:disable Metrics/AbcSize
     class SignedNumber < Node
       def value
         # Store sign if any.

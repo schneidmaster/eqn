@@ -8,7 +8,7 @@ grammar Eqn
   end
 
   rule expression
-    multitive addsub_group? <Eqn::Expression>
+    space? multitive space? addsub_group? space? <Eqn::Expression>
   end
 
   rule addsub_group
@@ -16,19 +16,19 @@ grammar Eqn
   end
 
   rule multitive
-    exponentiative muldiv_group? <Eqn::Expression>
+    exponentiative space? muldiv_group? <Eqn::Expression>
   end
 
   rule muldiv_group
-    muldiv_op multitive <Eqn::Expression::ExprGroup>
+    muldiv_op space? multitive <Eqn::Expression::ExprGroup>
   end
 
   rule exponentiative
-    operand pow_group? <Eqn::Expression>
+    operand space? pow_group? <Eqn::Expression>
   end
 
   rule pow_group
-    pow_op exponentiative <Eqn::Expression::ExprGroup>
+    pow_op space? exponentiative <Eqn::Expression::ExprGroup>
   end
 
   rule operand
@@ -40,19 +40,19 @@ grammar Eqn
   end
 
   rule if_func
-    'if' '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
+    'if' space? '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
   end
 
   rule round_func
-    'round' group <Eqn::Function::Round>
+    'round' space? group <Eqn::Function::Round>
   end
 
   rule roundup_func
-    'roundup' group <Eqn::Function::RoundUp>
+    'roundup' space? group <Eqn::Function::RoundUp>
   end
 
   rule rounddown_func
-    'rounddown' group <Eqn::Function::RoundDown>
+    'rounddown' space? group <Eqn::Function::RoundDown>
   end
 
   rule group
@@ -60,11 +60,11 @@ grammar Eqn
   end
 
   rule number
-    signed_float exponent? <Eqn::Number>
+    signed_float space? exponent? <Eqn::Number>
   end
 
   rule signed_float
-    sign? digits? decimal? <Eqn::Number::SignedNumber>
+    sign? space? digits? decimal? <Eqn::Number::SignedNumber>
   end
 
   rule decimal
@@ -72,7 +72,7 @@ grammar Eqn
   end
 
   rule exponent
-    exp signed_float <Eqn::Number::Exponent>
+    exp space? signed_float <Eqn::Number::Exponent>
   end
 
   rule pow_op
@@ -109,5 +109,9 @@ grammar Eqn
 
   rule digits
     [0-9]+ <Eqn::Terminal::Digits>
+  end
+
+  rule space
+    ("\s" / "\t")*
   end
 end

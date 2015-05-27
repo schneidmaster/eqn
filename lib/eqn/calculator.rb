@@ -10,7 +10,7 @@ module Eqn
       def valid?(data)
         calc(data)
         true
-      rescue Exception
+      rescue ParseError, ZeroDivisionError
         false
       end
     end
