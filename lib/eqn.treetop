@@ -64,7 +64,7 @@ grammar Eqn
   end
 
   rule signed_float
-    sign? digits decimal? <Eqn::Number::SignedNumber>
+    sign? digits? decimal? <Eqn::Number::SignedNumber>
   end
 
   rule decimal

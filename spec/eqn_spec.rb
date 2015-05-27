@@ -62,6 +62,9 @@ describe Eqn do
     it 'parses a negative float negative float exponent' do
       expect(Eqn::Calculator.calc('-2.5e-1.5')).to eq(-0.07905694150420947)
     end
+    it 'parses a float with no leading number' do
+      expect(Eqn::Calculator.calc('.1')).to eq(0.1)
+    end
   end
 
   context 'performs basic arithmetic' do
@@ -79,6 +82,7 @@ describe Eqn do
     end
     it 'performs basic multiplication' do
       expect(Eqn::Calculator.calc('2*4')).to eq(8)
+      expect(Eqn::Calculator.calc('2*.4')).to eq(0.8)
       expect(Eqn::Calculator.calc('2*-4')).to eq(-8)
       expect(Eqn::Calculator.calc('-2*4')).to eq(-8)
       expect(Eqn::Calculator.calc('-2*-4')).to eq(8)
