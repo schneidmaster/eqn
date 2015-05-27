@@ -5,7 +5,7 @@ require 'eqn/number'
 require 'eqn/terminal'
 
 module Eqn
-  WHITESPACE_REGEX = /([^0-9]( )+[^0-9])|([^0-9]( )+[0-9])|([0-9]( )+[^0-9])/
+  WHITESPACE_REGEX = /([^0-9]( )+[^0-9|.])|([^0-9]( )+[0-9|.])|([0-9]( )+[^0-9|.])/
 
   class Parser
     # Load the Treetop grammar from the grammar.

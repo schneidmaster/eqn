@@ -62,8 +62,11 @@ describe Eqn do
     it 'parses a negative float negative float exponent' do
       expect(Eqn::Calculator.calc('-2.5e-1.5')).to eq(-0.07905694150420947)
     end
-    it 'parses a float with no leading number' do
+    it 'parses a positive float with no leading number' do
       expect(Eqn::Calculator.calc('.1')).to eq(0.1)
+    end
+    it 'parses a negative float with no leading number' do
+      expect(Eqn::Calculator.calc('-.1')).to eq(-0.1)
     end
   end
 
@@ -245,6 +248,10 @@ describe Eqn do
 
     it 'does not remove whitespace between numbers' do
       expect(Eqn::Calculator.valid?('1 1')).to eq(false)
+    end
+
+    it 'does not remove whitespace between numbers and decimals' do
+      expect(Eqn::Calculator.valid?('1 .1')).to eq(false)
     end
 
     it 'does not remove whitespace between groups and numbers' do
