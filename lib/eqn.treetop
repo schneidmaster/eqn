@@ -103,10 +103,6 @@ grammar Eqn
     / '!=' <Eqn::Terminal::CompOp::Neq>
   end
 
-  rule dot
-    '.' <Eqn::Terminal::Dot>
-  end
-
   rule exp
     'e' / 'E'
   end
