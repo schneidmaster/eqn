@@ -287,6 +287,11 @@ describe Eqn do
   end
 
   context 'division by zero' do
+    it 'throws exception for zero division by zero' do
+      expect(Eqn::Calculator.valid?('0 / 0')).to eq(false)
+      expect { Eqn::Calculator.calc('0 / 0') }.to raise_error(ZeroDivisionError)
+    end
+
     it 'throws exception for positive division by zero' do
       expect(Eqn::Calculator.valid?('1 / 0')).to eq(false)
       expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
