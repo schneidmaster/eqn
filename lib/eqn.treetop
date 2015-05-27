@@ -64,7 +64,11 @@ grammar Eqn
   end
 
   rule signed_float
-    sign? space? digits? decimal? <Eqn::Number::SignedNumber>
+    sign? space? (float / digits) <Eqn::Number::SignedNumber>
+  end
+
+  rule float
+    digits? decimal <Eqn::Number::Float>
   end
 
   rule decimal
@@ -97,6 +101,10 @@ grammar Eqn
     / '==' <Eqn::Terminal::CompOp::Eq>
     / '='  <Eqn::Terminal::CompOp::Eq>
     / '!=' <Eqn::Terminal::CompOp::Neq>
+  end
+
+  rule dot
+    '.' <Eqn::Terminal::Dot>
   end
 
   rule exp

@@ -250,6 +250,9 @@ describe Eqn do
 
     it 'rejects an invalid equation' do
       expect(Eqn::Calculator.valid?('(1)1')).to eq(false)
+      expect { Eqn::Calculator.calc('(1)1') }.to raise_error(ParseError)
+      expect(Eqn::Calculator.valid?('1 / /')).to eq(false)
+      expect { Eqn::Calculator.calc('1 / /') }.to raise_error(ParseError)
     end
   end
 

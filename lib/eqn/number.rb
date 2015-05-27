@@ -9,24 +9,31 @@ module Eqn
       base
     end
 
-    # rubocop:disable Metrics/AbcSize
     class SignedNumber < Node
       def value
         # Store sign if any.
         sign_negative = elements.shift.negative? if elements.first.is_a? Terminal::Sign
 
-        # Store base number.
-        base = elements.shift.value
-
-        # Handle decimal.
-        base += elements.shift.value unless elements.empty?
+        # Evaluate float.
+        value = elements.shift.value
 
         # Apply sign if any.
         if sign_negative
-          -base
+          -value
         else
-          base
+          value
         end
+      end
+    end
+
+    class Float < Node
+      def value
+        base = elements.shift.value
+
+        # Add any decimal.
+        base += elements.shift.value unless elements.empty?
+
+        base
       end
     end
 
