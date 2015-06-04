@@ -7,3 +7,4 @@ install:
   - bundle
 script:
   - bundle exec rspec
+  - bundle exec rubocop
