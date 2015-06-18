@@ -20,30 +20,50 @@ module Eqn
 
     class Op < Node
       class Add < Node
+        def left_associative?
+          false
+        end
+
         def value
           '+'
         end
       end
 
       class Sub < Node
+        def left_associative?
+          true
+        end
+
         def value
           '-'
         end
       end
 
       class Mul < Node
+        def left_associative?
+          false
+        end
+
         def value
           '*'
         end
       end
 
       class Div < Node
+        def left_associative?
+          true
+        end
+
         def value
           '/'
         end
       end
 
       class Pow < Node
+        def left_associative?
+          false
+        end
+
         def value
           '**'
         end

@@ -169,6 +169,22 @@ describe Eqn do
     end
   end
 
+  context 'respects associativity' do
+    it 'performs subtraction left-associatively' do
+      expect(Eqn::Calculator.calc('2 - 5 + 4')).to eq(1)
+      expect(Eqn::Calculator.calc('5 - 4 - 3')).to eq(-2)
+    end
+
+    it 'performs division left-associatively' do
+      expect(Eqn::Calculator.calc('2 / 5 * 4')).to eq(1.6)
+      expect(Eqn::Calculator.calc('5 / 4 / 5')).to eq(0.25)
+    end
+
+    it 'performs exponentiation right-associatively' do
+      expect(Eqn::Calculator.calc('2 ^ 3 ^ 2')).to eq(512)
+    end
+  end
+
   context 'compares expressions' do
     it 'compares two numbers with >' do
       expect(Eqn::Calculator.calc('2 > 1')).to eq(true)
