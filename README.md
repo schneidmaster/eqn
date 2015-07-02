@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/eqn.svg)](http://badge.fury.io/rb/eqn) [![Build Status](https://travis-ci.org/schneidmaster/eqn.svg?branch=master)](https://travis-ci.org/schneidmaster/eqn)
+[![Gem Version](https://badge.fury.io/rb/eqn.svg)](http://badge.fury.io/rb/eqn) [![Circle CI](https://circleci.com/gh/schneidmaster/eqn.svg?style=svg)](https://circleci.com/gh/schneidmaster/eqn)
 
 # Eqn
 
