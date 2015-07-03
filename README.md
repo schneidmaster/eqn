@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/schneidmaster/eqn.svg?style=svg)](https://circleci.com/gh/schneidmaster/eqn) [![Gem Version](https://badge.fury.io/rb/eqn.svg)](http://badge.fury.io/rb/eqn)
+[![Circle CI](https://circleci.com/gh/schneidmaster/eqn.svg?style=svg)](https://circleci.com/gh/schneidmaster/eqn) [![Coverage Status](https://coveralls.io/repos/schneidmaster/eqn/badge.svg)](https://coveralls.io/r/schneidmaster/eqn) [![Gem Version](https://badge.fury.io/rb/eqn.svg)](http://badge.fury.io/rb/eqn)
 
 # Eqn
 
