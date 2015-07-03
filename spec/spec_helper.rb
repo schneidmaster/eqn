@@ -1,12 +1,12 @@
-require 'simplecov'
-require 'coveralls'
-
 if ENV['CIRCLE_ARTIFACTS']
-  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-  dir = File.join('..', '..', '..', ENV['CIRCLE_ARTIFACTS'], 'coverage')
-  SimpleCov.coverage_dir(dir)
+  require 'codeclimate-test-reporter'
+  CodeClimate::TestReporter.start
+else
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter '/workers/'
+  end
 end
-SimpleCov.start
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'eqn'

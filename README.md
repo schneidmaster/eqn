@@ -1,4 +1,7 @@
-[![Circle CI](https://circleci.com/gh/schneidmaster/eqn.svg?style=svg)](https://circleci.com/gh/schneidmaster/eqn) [![Coverage Status](https://coveralls.io/repos/schneidmaster/eqn/badge.svg)](https://coveralls.io/r/schneidmaster/eqn) [![Gem Version](https://badge.fury.io/rb/eqn.svg)](http://badge.fury.io/rb/eqn)
+[![Build Status](https://circleci.com/gh/schneidmaster/eqn.svg?style=svg)](https://circleci.com/gh/schneidmaster/eqn) 
+[![Test Coverage](https://codeclimate.com/github/schneidmaster/eqn/badges/coverage.svg)](https://codeclimate.com/github/schneidmaster/eqn/coverage)
+[![Code Climate](https://codeclimate.com/github/schneidmaster/eqn/badges/gpa.svg)](https://codeclimate.com/github/schneidmaster/eqn)
+[![Gem Version](https://badge.fury.io/rb/eqn.svg)](http://badge.fury.io/rb/eqn)
 
 # Eqn
 
