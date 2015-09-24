@@ -266,9 +266,9 @@ describe Eqn do
 
     it 'rejects an invalid equation' do
       expect(Eqn::Calculator.valid?('(1)1')).to eq(false)
-      expect { Eqn::Calculator.calc('(1)1') }.to raise_error(ParseError)
+      expect { Eqn::Calculator.calc('(1)1') }.to raise_error(Eqn::ParseError)
       expect(Eqn::Calculator.valid?('1 / /')).to eq(false)
-      expect { Eqn::Calculator.calc('1 / /') }.to raise_error(ParseError)
+      expect { Eqn::Calculator.calc('1 / /') }.to raise_error(Eqn::ParseError)
     end
   end
 
@@ -291,49 +291,49 @@ describe Eqn do
 
     it 'does not ignore whitespace between numbers' do
       expect(Eqn::Calculator.valid?('1 1')).to eq(false)
-      expect { Eqn::Calculator.calc('1 1') }.to raise_error(ParseError)
+      expect { Eqn::Calculator.calc('1 1') }.to raise_error(Eqn::ParseError)
     end
 
     it 'does not ignore whitespace between numbers and decimals' do
       expect(Eqn::Calculator.valid?('1 .1')).to eq(false)
-      expect { Eqn::Calculator.calc('1 .1') }.to raise_error(ParseError)
+      expect { Eqn::Calculator.calc('1 .1') }.to raise_error(Eqn::ParseError)
     end
 
     it 'does not ignore whitespace between groups and numbers' do
       expect(Eqn::Calculator.valid?('if(5 > 3, 1, 2) 2')).to eq(false)
-      expect { Eqn::Calculator.calc('if(5 > 3, 1, 2) 2') }.to raise_error(ParseError)
+      expect { Eqn::Calculator.calc('if(5 > 3, 1, 2) 2') }.to raise_error(Eqn::ParseError)
     end
   end
 
   context 'division by zero' do
     it 'throws exception for zero division by zero' do
       expect(Eqn::Calculator.valid?('0 / 0')).to eq(false)
-      expect { Eqn::Calculator.calc('0 / 0') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('0 / 0') }.to raise_error(Eqn::ZeroDivisionError)
     end
 
     it 'throws exception for positive division by zero' do
       expect(Eqn::Calculator.valid?('1 / 0')).to eq(false)
-      expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(Eqn::ZeroDivisionError)
     end
 
     it 'throws exception for negative division by zero' do
       expect(Eqn::Calculator.valid?('-1 / 0')).to eq(false)
-      expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(Eqn::ZeroDivisionError)
     end
 
     it 'throws exception for division by zero within round function' do
       expect(Eqn::Calculator.valid?('round(1 / 0)')).to eq(false)
-      expect { Eqn::Calculator.calc('round(1 / 0)') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('round(1 / 0)') }.to raise_error(Eqn::ZeroDivisionError)
     end
 
     it 'throws exception for division by zero within roundup function' do
       expect(Eqn::Calculator.valid?('roundup(1 / 0)')).to eq(false)
-      expect { Eqn::Calculator.calc('roundup(1 / 0)') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('roundup(1 / 0)') }.to raise_error(Eqn::ZeroDivisionError)
     end
 
     it 'throws exception for division by zero within rounddown function' do
       expect(Eqn::Calculator.valid?('rounddown(1 / 0)')).to eq(false)
-      expect { Eqn::Calculator.calc('rounddown(1 / 0)') }.to raise_error(ZeroDivisionError)
+      expect { Eqn::Calculator.calc('rounddown(1 / 0)') }.to raise_error(Eqn::ZeroDivisionError)
     end
   end
 end
