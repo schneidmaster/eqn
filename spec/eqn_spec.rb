@@ -320,5 +320,20 @@ describe Eqn do
       expect(Eqn::Calculator.valid?('-1 / 0')).to eq(false)
       expect { Eqn::Calculator.calc('-1 / 0') }.to raise_error(ZeroDivisionError)
     end
+
+    it 'throws exception for division by zero within round function' do
+      expect(Eqn::Calculator.valid?('round(1 / 0)')).to eq(false)
+      expect { Eqn::Calculator.calc('round(1 / 0)') }.to raise_error(ZeroDivisionError)
+    end
+
+    it 'throws exception for division by zero within roundup function' do
+      expect(Eqn::Calculator.valid?('roundup(1 / 0)')).to eq(false)
+      expect { Eqn::Calculator.calc('roundup(1 / 0)') }.to raise_error(ZeroDivisionError)
+    end
+
+    it 'throws exception for division by zero within rounddown function' do
+      expect(Eqn::Calculator.valid?('rounddown(1 / 0)')).to eq(false)
+      expect { Eqn::Calculator.calc('rounddown(1 / 0)') }.to raise_error(ZeroDivisionError)
+    end
   end
 end

@@ -18,19 +18,25 @@ module Eqn
 
     class Round < Node
       def value
-        elements.shift.value.round
+        value = elements.shift.value
+        fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
+        value.round
       end
     end
 
     class RoundUp < Node
       def value
-        elements.shift.value.ceil
+        value = elements.shift.value
+        fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
+        value.ceil
       end
     end
 
     class RoundDown < Node
       def value
-        elements.shift.value.floor
+        value = elements.shift.value
+        fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
+        value.floor
       end
     end
   end
