@@ -1,8 +1,8 @@
-require 'eqn/function'
 require 'eqn/comparation'
+require 'eqn/errors'
 require 'eqn/expression'
+require 'eqn/function'
 require 'eqn/number'
-require 'eqn/parse_error'
 require 'eqn/terminal'
 
 module Eqn

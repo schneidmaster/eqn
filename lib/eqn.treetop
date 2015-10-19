@@ -64,7 +64,7 @@ grammar Eqn
   end
 
   rule signed_float
-    sign? space? (float / digits) <Eqn::Number::SignedNumber>
+    sign? space? (float / digits / variable) <Eqn::Number::SignedNumber>
   end
 
   rule float
@@ -113,6 +113,10 @@ grammar Eqn
 
   rule digits
     [0-9]+ <Eqn::Terminal::Digits>
+  end
+
+  rule variable
+    [a-zA-Z]+ <Eqn::Terminal::Variable>
   end
 
   rule space

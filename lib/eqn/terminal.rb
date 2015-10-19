@@ -2,6 +2,18 @@ module Eqn
   module Terminal
     class Node < Treetop::Runtime::SyntaxNode; end
 
+    class Variable < Node
+      def value
+        unless Eqn::Calculator.class_variable_get(:@@vars).key? text_value.intern
+          fail NoVariableValueError, "No value given for: #{text_value}"
+        end
+        unless Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern].is_a? Numeric
+          fail NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern]}"
+        end
+        Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern]
+      end
+    end
+
     class Digits < Node
       def dec_value
         ".#{text_value}".to_f

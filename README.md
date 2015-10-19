@@ -45,6 +45,19 @@ If you want to peek at how Eqn is parsing an equation, run the following to get 
 
 Eqn follows the standard mathematical order of operations: parentheses, exponentiation, multiplication/division, addition/subtraction. It ignores  whitespace, so `1 + 1` === `1+1`. (However, it does not ignore whitespace between two numbers, so `1 1` is invalid.)
 
+### Variables
+
+Eqn supports dynamically inserting values into an equation. Variables are passed to the calculator method via a hash; variable names may contain any lowercase or uppercase letters. Some examples:
+
+    $ Eqn::Calculator.calc('a + 1', a: 1)
+    # => 2
+
+    $ Eqn::Calculator.calc('5 * value', value: 2.5)
+    # => 12.5
+
+    $ Eqn::Calculator.calc('if(a > 10, b, c)', a: 15, b: 1, c: 0) # see below for function documentation
+    # => 1
+
 ### Functions
 
 Eqn presently supports four functions:
