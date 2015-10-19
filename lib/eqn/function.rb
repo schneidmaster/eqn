@@ -8,11 +8,7 @@ module Eqn
         ls = elements.shift.value
         rs = elements.shift.value
 
-        if comp_val
-          ls
-        else
-          rs
-        end
+        comp_val ? ls : rs
       end
     end
 

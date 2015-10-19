@@ -15,7 +15,7 @@ module Eqn
       def valid?(data, vars = {})
         calc(data, vars)
         true
-      rescue NonNumericVariableError, NoVariableValueError, ParseError, ZeroDivisionError
+      rescue EqnError
         false
       end
     end

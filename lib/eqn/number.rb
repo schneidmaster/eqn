@@ -18,11 +18,7 @@ module Eqn
         value = elements.shift.value
 
         # Apply sign if any.
-        if sign_negative
-          -value
-        else
-          value
-        end
+        sign_negative ? -value : value
       end
     end
 
