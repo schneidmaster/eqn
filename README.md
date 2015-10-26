@@ -70,21 +70,21 @@ For example, `if(5 > 3, 1, 2)` would evaluate to `1`.
 
 **round**
 
-Syntax: `round(number)`
+Syntax: `round(number, [decimals])`
 
-Rounds the number up if the decimal is greater than 0.5 and down otherwise (i.e. "normal" rounding).
+Rounds the number up if the decimal is greater than 0.5 and down otherwise (i.e. "normal" rounding). Optionally, pass a number of decimal places to round to as a second parameter (the default is 0).
 
 **roundup**
 
-Syntax: `roundup(number)`
+Syntax: `roundup(number, [decimals])`
 
-Rounds the number up to the next whole integer (i.e. ceiling function)
+Rounds the number up (i.e. ceiling function). Optionally, pass a number of decimal places to round to as a second parameter (the default is 0).
 
 **rounddown**
 
-Syntax: `rounddown(number)`
+Syntax: `rounddown(number, [decimals])`
 
-Rounds the number down to the next whole integer (i.e. floor function)
+Rounds the number down (i.e. floor function). Optionally, pass a number of decimal places to round to as a second parameter (the default is 0).
 
 ## Development
 

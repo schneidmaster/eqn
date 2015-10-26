@@ -10,7 +10,6 @@ module Eqn
       elements.empty?
     end
 
-    # rubocop:disable Metrics/AbcSize
     def value
       if elements.count == 1
         elements.shift.value
@@ -34,7 +33,6 @@ module Eqn
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     class ExprGroup < Node
       def left_associative?

@@ -3,7 +3,6 @@ module Eqn
     class Node < Treetop::Runtime::SyntaxNode; end
 
     class Variable < Node
-      # rubocop:disable Metrics/AbcSize
       def value
         unless Eqn::Calculator.class_variable_get(:@@vars).key? text_value.intern
           fail NoVariableValueError, "No value given for: #{text_value}"
@@ -13,7 +12,6 @@ module Eqn
         end
         Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern]
       end
-      # rubocop:enable Metrics/AbcSize
     end
 
     class Digits < Node

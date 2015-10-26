@@ -16,7 +16,11 @@ module Eqn
       def value
         value = elements.shift.value
         fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
-        value.round
+        if elements.empty?
+          value.round
+        else
+          value.round(elements.shift.value)
+        end
       end
     end
 
@@ -24,7 +28,12 @@ module Eqn
       def value
         value = elements.shift.value
         fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
-        value.ceil
+        if elements.empty?
+          value.ceil
+        else
+          decimals = elements.shift.value
+          (value * 10**decimals).ceil.to_f / 10**decimals
+        end
       end
     end
 
@@ -32,7 +41,12 @@ module Eqn
       def value
         value = elements.shift.value
         fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
-        value.floor
+        if elements.empty?
+          value.floor
+        else
+          decimals = elements.shift.value
+          (value * 10**decimals).floor.to_f / 10**decimals
+        end
       end
     end
   end

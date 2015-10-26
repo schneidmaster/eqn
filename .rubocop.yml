@@ -3,6 +3,8 @@ AllCops:
     - db/**/*
     - vendor/**/*
 
+AbcSize:
+  Enabled: False
 BlockNesting: 
   Max: 4
 ClassLength:
