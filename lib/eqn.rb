@@ -1,5 +1,2 @@
 require 'treetop'
-require 'eqn/version'
-require 'eqn/parser'
-require 'eqn/calculator'
-require 'eqn/engine' if defined? Rails
+Dir.glob File.join(__dir__, 'eqn', '**', '*.rb'), &method(:require)
