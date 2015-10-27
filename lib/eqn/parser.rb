@@ -24,7 +24,7 @@ module Eqn
 
     def self.clean_tree(root_node)
       return if root_node.elements.nil?
-      root_node.elements.delete_if { |node| node.class.name == 'Treetop::Runtime::SyntaxNode' }
+      root_node.elements.delete_if { |node| node.class == Treetop::Runtime::SyntaxNode }
       root_node.elements.each { |node| clean_tree(node) }
       root_node
     end
