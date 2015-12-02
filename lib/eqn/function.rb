@@ -20,7 +20,7 @@ module Eqn
           value.send(fn)
         else
           decimals = elements.shift.value
-          fn == :round ? value.round(decimals) : (value * 10**decimals).send(fn).to_f / 10**decimals
+          (value * 10**decimals).send(fn).to_f / 10**decimals
         end
       end
     end
