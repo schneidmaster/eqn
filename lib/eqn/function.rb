@@ -12,41 +12,34 @@ module Eqn
       end
     end
 
-    class Round < Node
-      def value
+    class RoundBase < Node
+      def value(fn)
         value = elements.shift.value
         fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
         if elements.empty?
-          value.round
+          value.send(fn)
         else
-          value.round(elements.shift.value)
+          decimals = elements.shift.value
+          fn == :round ? value.round(decimals) : (value * 10**decimals).send(fn).to_f / 10**decimals
         end
       end
     end
 
-    class RoundUp < Node
+    class Round < RoundBase
       def value
-        value = elements.shift.value
-        fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
-        if elements.empty?
-          value.ceil
-        else
-          decimals = elements.shift.value
-          (value * 10**decimals).ceil.to_f / 10**decimals
-        end
+        super(:round)
       end
     end
 
-    class RoundDown < Node
+    class RoundUp < RoundBase
       def value
-        value = elements.shift.value
-        fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
-        if elements.empty?
-          value.floor
-        else
-          decimals = elements.shift.value
-          (value * 10**decimals).floor.to_f / 10**decimals
-        end
+        super(:ceil)
+      end
+    end
+
+    class RoundDown < RoundBase
+      def value
+        super(:floor)
       end
     end
   end
