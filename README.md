@@ -58,6 +58,15 @@ Eqn supports dynamically inserting values into an equation. Variables are passed
     $ Eqn::Calculator.calc('if(a > 10, b, c)', a: 15, b: 1, c: 0) # see below for function documentation
     # => 1
 
+If you need distinct equations with variable sets, you can instantiate separate instances:
+
+    $ calc = Eqn::Calculator.new('1 + abc', abc: 2.0)
+    $ calc.calc
+    # => 3.0
+    $ calc_two = Eqn::Calculator.new('1 + abc', abc: 5.0)
+    $ calc_two.calc
+    # => 6.0
+
 ### Functions
 
 Eqn presently supports four functions:
