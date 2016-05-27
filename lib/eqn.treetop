@@ -84,27 +84,27 @@ grammar Eqn
   end
 
   rule pow_op
-    '^' <Eqn::Terminal::Op::Pow>
+    '^' <Eqn::Terminal::Op::RightAssociativeOp>
   end
 
   rule muldiv_op
-      '*' <Eqn::Terminal::Op::Mul>
-    / '/' <Eqn::Terminal::Op::Div>
+      '*' <Eqn::Terminal::Op::RightAssociativeOp>
+    / '/' <Eqn::Terminal::Op::LeftAssociativeOp>
   end
 
   rule addsub_op
-      '+' <Eqn::Terminal::Op::Add>
-    / '-' <Eqn::Terminal::Op::Sub>
+      '+' <Eqn::Terminal::Op::RightAssociativeOp>
+    / '-' <Eqn::Terminal::Op::LeftAssociativeOp>
   end
 
   rule comp_op
-      '<=' <Eqn::Terminal::CompOp::Lte>
-    / '>=' <Eqn::Terminal::CompOp::Gte>
-    / '<'  <Eqn::Terminal::CompOp::Lt>
-    / '>'  <Eqn::Terminal::CompOp::Gt>
-    / '==' <Eqn::Terminal::CompOp::Eq>
-    / '='  <Eqn::Terminal::CompOp::Eq>
-    / '!=' <Eqn::Terminal::CompOp::Neq>
+      '<=' <Eqn::Terminal::CompOp>
+    / '>=' <Eqn::Terminal::CompOp>
+    / '<'  <Eqn::Terminal::CompOp>
+    / '>'  <Eqn::Terminal::CompOp>
+    / '==' <Eqn::Terminal::CompOp>
+    / '='  <Eqn::Terminal::CompOp>
+    / '!=' <Eqn::Terminal::CompOp>
   end
 
   rule exp

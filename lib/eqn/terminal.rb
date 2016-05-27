@@ -30,75 +30,17 @@ module Eqn
         is_a? LeftAssociativeOp
       end
 
+      def value
+        text_value == '^' ? :** : text_value.intern
+      end
+
       class LeftAssociativeOp < Op; end
       class RightAssociativeOp < Op; end
-
-      class Add < RightAssociativeOp
-        def value
-          :+
-        end
-      end
-
-      class Sub < LeftAssociativeOp
-        def value
-          :-
-        end
-      end
-
-      class Mul < RightAssociativeOp
-        def value
-          :*
-        end
-      end
-
-      class Div < LeftAssociativeOp
-        def value
-          :/
-        end
-      end
-
-      class Pow < RightAssociativeOp
-        def value
-          :**
-        end
-      end
     end
 
     class CompOp < Treetop::Runtime::SyntaxNode
-      class Lt < Treetop::Runtime::SyntaxNode
-        def value
-          :<
-        end
-      end
-
-      class Gt < Treetop::Runtime::SyntaxNode
-        def value
-          :>
-        end
-      end
-
-      class Lte < Treetop::Runtime::SyntaxNode
-        def value
-          :<=
-        end
-      end
-
-      class Gte < Treetop::Runtime::SyntaxNode
-        def value
-          :>=
-        end
-      end
-
-      class Eq < Treetop::Runtime::SyntaxNode
-        def value
-          :==
-        end
-      end
-
-      class Neq < Treetop::Runtime::SyntaxNode
-        def value
-          :!=
-        end
+      def value
+        text_value == '=' ? :== : text_value.intern
       end
     end
   end
