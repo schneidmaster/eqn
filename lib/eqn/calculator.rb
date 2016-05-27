@@ -1,7 +1,7 @@
 module Eqn
   class Calculator
     class << self
-      def calc(data, vars = {})
+      def calculate(data, vars = {})
         @@vars = vars
         begin
           result = Parser.parse(data).value
@@ -11,6 +11,7 @@ module Eqn
           @@vars = nil
         end
       end
+      alias_method :calc, :calculate
 
       def valid?(data, vars = {})
         calc(data, vars)
