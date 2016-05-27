@@ -5,8 +5,7 @@ module Eqn
       if elements.empty?
         val_one
       else
-        op, val_two = elements.shift.value
-        val_one.send(op, val_two)
+        val_one.send(*elements.shift.value)
       end
     end
 
