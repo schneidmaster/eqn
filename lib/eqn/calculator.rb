@@ -5,8 +5,12 @@ module Eqn
       @vars = vars
     end
 
-    def set(key, value)
-      @vars[key.intern] = value
+    def set(key_or_hash, value = nil)
+      if key_or_hash.is_a?(Hash)
+        @vars.merge!(key_or_hash)
+      else
+        @vars[key_or_hash.intern] = value
+      end
     end
 
     def method_missing(method)
@@ -16,14 +20,13 @@ module Eqn
 
     class << self
       def calculate(data, vars = {})
-        @@cache_vars = @@vars if defined?(@@vars)
         @@vars = vars
         begin
           result = Parser.parse(data).value
           raise ZeroDivisionError if result.is_a?(Float) && (result.abs == Float::INFINITY || result.nan?)
           result
         ensure
-          @@vars = defined?(@@cache_vars) ? @@cache_vars : nil
+          @@vars = nil
         end
       end
       alias calc calculate

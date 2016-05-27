@@ -66,6 +66,12 @@ If you need distinct equations with variable sets, you can instantiate separate 
     $ calc_two = Eqn::Calculator.new('1 + abc', abc: 5.0)
     $ calc_two.calc
     # => 6.0
+    $ calc_two.set(:abc, 3.0)
+    $ calc_two.calc
+    # => 4.0
+    $ calc_two.set(abc: 4.0)
+    $ calc_two.calc
+    # => 5.0
 
 ### Functions
 

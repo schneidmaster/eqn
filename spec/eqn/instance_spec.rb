@@ -55,6 +55,16 @@ describe Eqn do
     end
   end
 
+  context 'sets var by hash after initialization' do
+    subject { Eqn::Calculator.new('abc+1') }
+
+    before { subject.set(abc: 2) }
+
+    it 'returns expected result' do
+      expect(subject.calc).to eq(3.0)
+    end
+  end
+
   describe 'instance with vars' do
     subject { Eqn::Calculator.new('variable + 1', variable: 3).calc }
 
