@@ -3,8 +3,8 @@ module Eqn
     class Variable < Treetop::Runtime::SyntaxNode
       def value
         val = Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern]
-        fail NoVariableValueError, "No value given for: #{text_value}" unless val
-        fail NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{val}" unless val.is_a? Numeric
+        raise NoVariableValueError, "No value given for: #{text_value}" unless val
+        raise NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{val}" unless val.is_a? Numeric
         val
       end
     end

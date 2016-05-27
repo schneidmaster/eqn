@@ -13,7 +13,7 @@ module Eqn
     class RoundBase < Treetop::Runtime::SyntaxNode
       def value(fn)
         value = elements.shift.value
-        fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
+        raise ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
         if elements.empty?
           value.send(fn)
         else

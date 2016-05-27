@@ -10,7 +10,7 @@ module Eqn
         tree = @@parser.parse(data.downcase)
 
         # Raise any errors.
-        fail ParseError, "Parse error at offset: #{@@parser.index}" + @@parser.failure_reason if tree.nil?
+        raise ParseError, "Parse error at offset: #{@@parser.index}" + @@parser.failure_reason if tree.nil?
 
         # Remove extraneous nodes and return tree.
         clean_tree(tree)

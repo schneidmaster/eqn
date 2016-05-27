@@ -20,13 +20,13 @@ module Eqn
         @@vars = vars
         begin
           result = Parser.parse(data).value
-          fail ZeroDivisionError if result.is_a?(Float) && (result.abs == Float::INFINITY || result.nan?)
+          raise ZeroDivisionError if result.is_a?(Float) && (result.abs == Float::INFINITY || result.nan?)
           result
         ensure
           @@vars = defined?(@@cache_vars) ? @@cache_vars : nil
         end
       end
-      alias_method :calc, :calculate
+      alias calc calculate
 
       def valid?(data, vars = {})
         calc(data, vars)
