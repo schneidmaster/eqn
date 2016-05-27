@@ -1,7 +1,5 @@
 module Eqn
-  class Node < Treetop::Runtime::SyntaxNode; end
-
-  class Expression < Node
+  class Expression < Treetop::Runtime::SyntaxNode
     def left_associative?
       elements.any? && elements.last.left_associative?
     end
@@ -34,7 +32,7 @@ module Eqn
       end
     end
 
-    class ExprGroup < Node
+    class ExprGroup < Treetop::Runtime::SyntaxNode
       def left_associative?
         elements.first.left_associative?
       end

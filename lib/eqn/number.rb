@@ -1,7 +1,5 @@
 module Eqn
-  class Node < Treetop::Runtime::SyntaxNode; end
-
-  class Number < Node
+  class Number < Treetop::Runtime::SyntaxNode
     def value
       base = elements.shift.value
       # Apply any exponent.
@@ -9,7 +7,7 @@ module Eqn
       base
     end
 
-    class SignedNumber < Node
+    class SignedNumber < Treetop::Runtime::SyntaxNode
       def value
         # Store sign if any.
         sign_negative = elements.shift.negative? if elements.first.is_a? Terminal::Sign
@@ -22,7 +20,7 @@ module Eqn
       end
     end
 
-    class Float < Node
+    class Float < Treetop::Runtime::SyntaxNode
       def value
         base = elements.shift.value
 
@@ -33,13 +31,13 @@ module Eqn
       end
     end
 
-    class Decimal < Node
+    class Decimal < Treetop::Runtime::SyntaxNode
       def value
         elements.shift.dec_value
       end
     end
 
-    class Exponent < Node
+    class Exponent < Treetop::Runtime::SyntaxNode
       def value
         10**elements.shift.value
       end

@@ -1,8 +1,6 @@
 module Eqn
   module Terminal
-    class Node < Treetop::Runtime::SyntaxNode; end
-
-    class Variable < Node
+    class Variable < Treetop::Runtime::SyntaxNode
       def value
         val = Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern]
         fail NoVariableValueError, "No value given for: #{text_value}" unless val
@@ -11,7 +9,7 @@ module Eqn
       end
     end
 
-    class Digits < Node
+    class Digits < Treetop::Runtime::SyntaxNode
       def dec_value
         ".#{text_value}".to_f
       end
@@ -21,13 +19,13 @@ module Eqn
       end
     end
 
-    class Sign < Node
+    class Sign < Treetop::Runtime::SyntaxNode
       def negative?
         text_value == '-'
       end
     end
 
-    class Op < Node
+    class Op < Treetop::Runtime::SyntaxNode
       def left_associative?
         is_a? LeftAssociativeOp
       end
@@ -66,38 +64,38 @@ module Eqn
       end
     end
 
-    class CompOp < Node
-      class Lt < Node
+    class CompOp < Treetop::Runtime::SyntaxNode
+      class Lt < Treetop::Runtime::SyntaxNode
         def value
           :<
         end
       end
 
-      class Gt < Node
+      class Gt < Treetop::Runtime::SyntaxNode
         def value
           :>
         end
       end
 
-      class Lte < Node
+      class Lte < Treetop::Runtime::SyntaxNode
         def value
           :<=
         end
       end
 
-      class Gte < Node
+      class Gte < Treetop::Runtime::SyntaxNode
         def value
           :>=
         end
       end
 
-      class Eq < Node
+      class Eq < Treetop::Runtime::SyntaxNode
         def value
           :==
         end
       end
 
-      class Neq < Node
+      class Neq < Treetop::Runtime::SyntaxNode
         def value
           :!=
         end

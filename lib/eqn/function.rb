@@ -1,8 +1,6 @@
 module Eqn
-  class Node < Treetop::Runtime::SyntaxNode; end
-
   module Function
-    class If < Node
+    class If < Treetop::Runtime::SyntaxNode
       def value
         comp_val = elements.shift.value
         ls = elements.shift.value
@@ -12,7 +10,7 @@ module Eqn
       end
     end
 
-    class RoundBase < Node
+    class RoundBase < Treetop::Runtime::SyntaxNode
       def value(fn)
         value = elements.shift.value
         fail ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)

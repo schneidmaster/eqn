@@ -1,7 +1,5 @@
 module Eqn
-  class Node < Treetop::Runtime::SyntaxNode; end
-
-  class Comparation < Node
+  class Comparation < Treetop::Runtime::SyntaxNode
     def value
       val_one = elements.shift.value
       if elements.empty?
@@ -12,7 +10,7 @@ module Eqn
       end
     end
 
-    class CompGroup < Node
+    class CompGroup < Treetop::Runtime::SyntaxNode
       def value
         [elements.shift.value, elements.shift.value]
       end
