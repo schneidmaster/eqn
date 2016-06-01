@@ -65,6 +65,34 @@ describe Eqn do
     end
   end
 
+  context 'sets var by method after initialization' do
+    subject { Eqn::Calculator.new('abc+1') }
+
+    before { subject.abc = 2 }
+
+    it 'returns expected result' do
+      expect(subject.calc).to eq(3.0)
+    end
+  end
+
+  context 'gets var by method after initialization' do
+    subject { Eqn::Calculator.new('abc+1') }
+
+    before { subject.abc = 2 }
+
+    it 'returns expected result' do
+      expect(subject.abc).to eq(2)
+    end
+  end
+
+  context 'errors on getting var by method after initialization if var does not exist' do
+    subject { Eqn::Calculator.new('abc+1') }
+
+    it 'returns expected result' do
+      expect { subject.abc }.to raise_error(NoMethodError)
+    end
+  end
+
   describe 'instance with vars' do
     subject { Eqn::Calculator.new('variable + 1', variable: 3).calc }
 

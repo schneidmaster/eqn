@@ -66,11 +66,18 @@ If you need distinct equations with variable sets, you can instantiate separate 
     $ calc_two = Eqn::Calculator.new('1 + abc', abc: 5.0)
     $ calc_two.calc
     # => 6.0
-    $ calc_two.set(:abc, 3.0)
-    $ calc_two.calc
+
+On calculator instances, variables can be set via key-value syntax, hash syntax, or as a method:
+
+    $ calc = Eqn::Calculator.new('1 + abc')
+    $ calc.set(:abc, 3.0)
+    $ calc.abc
+    # => 3.0
+    $ calc.set(abc: 4.0)
+    $ calc.abc
     # => 4.0
-    $ calc_two.set(abc: 4.0)
-    $ calc_two.calc
+    $ calc.abc = 5.0
+    $ calc.abc
     # => 5.0
 
 ### Functions

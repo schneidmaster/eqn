@@ -13,9 +13,16 @@ module Eqn
       end
     end
 
-    def method_missing(method)
-      super unless %i(calculate calc valid?).include?(method)
-      self.class.send(method, @eqn, @vars)
+    def method_missing(method, *args)
+      if %i(calculate calc valid?).include?(method)
+        self.class.send(method, @eqn, @vars)
+      elsif (match = method.to_s.match(/^[A-Za-z]+=$/))
+        @vars[match.to_s.delete('=').intern] = args.first
+      elsif (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
+        @vars[var]
+      else
+        super
+      end
     end
 
     class << self
