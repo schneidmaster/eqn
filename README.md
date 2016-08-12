@@ -18,30 +18,40 @@ gem 'eqn'
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install eqn
+```bash
+$ gem install eqn
+```
 
 ## Usage
 
 To evaluate an equation string, run the following:
 
-    $ Eqn::Calculator.calc('1 + 1')
-    # => 2
+```ruby
+Eqn::Calculator.calc('1 + 1')
+# => 2
+```
 
 You can also check if an equation is valid:
 
-    $ Eqn::Calculator.valid?('1 + 1')
-    # => true
-    $ Eqn::Calculator.valid?('1 + / 1')
-    # => false
+```ruby
+Eqn::Calculator.valid?('1 + 1')
+# => true
+Eqn::Calculator.valid?('1 + / 1')
+# => false
+```
 
 If you want to peek at how Eqn is parsing an equation, run the following to get the syntax tree:
 
-    $ Eqn::Parser.parse('1 + 1')
-    # => <syntax tree is printed>
+```ruby
+Eqn::Parser.parse('1 + 1')
+# => <syntax tree is printed>
+```
 
 Eqn follows the standard mathematical order of operations: parentheses, exponentiation, multiplication/division, addition/subtraction. It ignores  whitespace, so `1 + 1` === `1+1`. (However, it does not ignore whitespace between two numbers, so `1 1` is invalid.)
 
@@ -49,36 +59,42 @@ Eqn follows the standard mathematical order of operations: parentheses, exponent
 
 Eqn supports dynamically inserting values into an equation. Variables are passed to the calculator method via a hash; variable names may contain any lowercase or uppercase letters. Some examples:
 
-    $ Eqn::Calculator.calc('a + 1', a: 1)
-    # => 2
+```ruby
+Eqn::Calculator.calc('a + 1', a: 1)
+# => 2
 
-    $ Eqn::Calculator.calc('5 * value', value: 2.5)
-    # => 12.5
+Eqn::Calculator.calc('5 * value', value: 2.5)
+# => 12.5
 
-    $ Eqn::Calculator.calc('if(a > 10, b, c)', a: 15, b: 1, c: 0) # see below for function documentation
-    # => 1
+Eqn::Calculator.calc('if(a > 10, b, c)', a: 15, b: 1, c: 0) # see below for function documentation
+# => 1
+```
 
 If you need distinct equations with variable sets, you can instantiate separate instances:
 
-    $ calc = Eqn::Calculator.new('1 + abc', abc: 2.0)
-    $ calc.calc
-    # => 3.0
-    $ calc_two = Eqn::Calculator.new('1 + abc', abc: 5.0)
-    $ calc_two.calc
-    # => 6.0
+```ruby
+calc = Eqn::Calculator.new('1 + abc', abc: 2.0)
+calc.calc
+# => 3.0
+calc_two = Eqn::Calculator.new('1 + abc', abc: 5.0)
+calc_two.calc
+# => 6.0
+```
 
 On calculator instances, variables can be set via key-value syntax, hash syntax, or as a method:
 
-    $ calc = Eqn::Calculator.new('1 + abc')
-    $ calc.set(:abc, 3.0)
-    $ calc.abc
-    # => 3.0
-    $ calc.set(abc: 4.0)
-    $ calc.abc
-    # => 4.0
-    $ calc.abc = 5.0
-    $ calc.abc
-    # => 5.0
+```ruby
+calc = Eqn::Calculator.new('1 + abc')
+calc.set(:abc, 3.0)
+calc.abc
+# => 3.0
+calc.set(abc: 4.0)
+calc.abc
+# => 4.0
+calc.abc = 5.0
+calc.abc
+# => 5.0
+```
 
 ### Functions
 
