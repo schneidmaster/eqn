@@ -15,6 +15,8 @@ CyclomaticComplexity:
   Enabled: False
 Documentation:
   Enabled: false
+FrozenStringLiteralComment:
+  Enabled: false
 LineLength:
   Max: 175
 MethodLength:
