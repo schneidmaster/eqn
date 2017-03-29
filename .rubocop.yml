@@ -4,20 +4,26 @@ AllCops:
     - vendor/**/*
 
 AbcSize:
-  Enabled: False
+  Enabled: false
+BlockLength:
+  Enabled: false
 BlockNesting: 
   Max: 4
 ClassLength:
-  Enabled: False
+  Enabled: false
 ClassVars:
-  Enabled: False
+  Enabled: false
 CyclomaticComplexity:
-  Enabled: False
+  Enabled: false
 Documentation:
+  Enabled: false
+FileName:
   Enabled: false
 FrozenStringLiteralComment:
   Enabled: false
 LineLength:
   Max: 175
 MethodLength:
+  Enabled: false
+ModuleLength:
   Enabled: false
