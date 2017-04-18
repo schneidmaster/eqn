@@ -4,7 +4,7 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'eqn/version'
 
-config_files = %w(.rspec .rubocop.yml .ruby-version Appraisals circle.yml)
+config_files = %w[.rspec .rubocop.yml .ruby-version Appraisals circle.yml]
 
 Gem::Specification.new do |spec|
   spec.name          = 'eqn'

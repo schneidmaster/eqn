@@ -14,7 +14,7 @@ module Eqn
     end
 
     def method_missing(method, *args)
-      if %i(calculate calc valid?).include?(method)
+      if %i[calculate calc valid?].include?(method)
         self.class.send(method, @eqn, @vars)
       elsif (match = method.to_s.match(/^[A-Za-z]+=$/))
         @vars[match.to_s.delete('=').intern] = args.first
@@ -26,7 +26,7 @@ module Eqn
     end
 
     def respond_to_missing?(method)
-      %i(calculate calc valid?).include?(method) || method.to_s.match(/^[A-Za-z]+=$/) || (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
+      %i[calculate calc valid?].include?(method) || method.to_s.match(/^[A-Za-z]+=$/) || (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
     end
 
     class << self
