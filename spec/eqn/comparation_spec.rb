@@ -32,7 +32,7 @@ describe Eqn do
       expect(Eqn::Calculator.calc('1 == 2')).to eq(false)
     end
 
-    it 'compares two numbers with 1=' do
+    it 'compares two numbers with !=' do
       expect(Eqn::Calculator.calc('2 != 1')).to eq(true)
       expect(Eqn::Calculator.calc('2 != 2')).to eq(false)
     end
