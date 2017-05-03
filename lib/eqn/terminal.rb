@@ -1,8 +1,8 @@
 module Eqn
   module Terminal
     class Variable < Treetop::Runtime::SyntaxNode
-      def value
-        val = Eqn::Calculator.class_variable_get(:@@vars)[text_value.intern]
+      def value(vars = {})
+        val = vars[text_value.intern]
         raise NoVariableValueError, "No value given for: #{text_value}" unless val
         raise NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{val}" unless val.is_a? Numeric
         val
@@ -14,7 +14,7 @@ module Eqn
         ".#{text_value}".to_f
       end
 
-      def value
+      def value(_vars = {})
         text_value.to_f
       end
     end
@@ -30,7 +30,7 @@ module Eqn
         is_a? LeftAssociativeOp
       end
 
-      def value
+      def value(_vars = {})
         text_value == '^' ? :** : text_value.intern
       end
 
@@ -39,7 +39,7 @@ module Eqn
     end
 
     class CompOp < Treetop::Runtime::SyntaxNode
-      def value
+      def value(_vars = {})
         text_value == '=' ? :== : text_value.intern
       end
     end

@@ -31,14 +31,9 @@ module Eqn
 
     class << self
       def calculate(data, vars = {})
-        @@vars = vars
-        begin
-          result = Parser.parse(data).value
-          raise ZeroDivisionError if result.is_a?(Float) && (result.abs == Float::INFINITY || result.nan?)
-          result
-        ensure
-          @@vars = nil
-        end
+        result = Parser.parse(data).value(vars)
+        raise ZeroDivisionError if result.is_a?(Float) && (result.abs == Float::INFINITY || result.nan?)
+        result
       end
       alias calc calculate
 

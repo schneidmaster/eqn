@@ -8,17 +8,17 @@ module Eqn
       elements.empty?
     end
 
-    def value
+    def value(vars = {})
       if elements.count == 1
-        elements.shift.value
+        elements.shift.value(vars)
       else
-        base = elements.shift.value
+        base = elements.shift.value(vars)
 
         # Aggressively consume left associative operators to maintain associativity.
         while left_associative?
-          op, num_expr = elements.shift.value
+          op, num_expr = elements.shift.value(vars)
           num_expr_operand = num_expr.elements.shift
-          base = base.send(op, num_expr_operand.value)
+          base = base.send(op, num_expr_operand.value(vars))
           elements.push num_expr.elements.shift unless num_expr.term?
         end
 
@@ -26,8 +26,8 @@ module Eqn
         if term?
           base
         else
-          op, num_expr = elements.shift.value
-          base.send(op, num_expr.value)
+          op, num_expr = elements.shift.value(vars)
+          base.send(op, num_expr.value(vars))
         end
       end
     end
@@ -37,8 +37,8 @@ module Eqn
         elements.first.left_associative?
       end
 
-      def value
-        [elements.shift.value, elements.shift]
+      def value(vars = {})
+        [elements.shift.value(vars), elements.shift]
       end
     end
   end
