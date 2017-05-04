@@ -1,19 +1,10 @@
 AllCops:
   Exclude:
-    - db/**/*
     - vendor/**/*
 
 AbcSize:
   Enabled: false
 BlockLength:
-  Enabled: false
-BlockNesting: 
-  Max: 4
-ClassLength:
-  Enabled: false
-ClassVars:
-  Enabled: false
-CyclomaticComplexity:
   Enabled: false
 Documentation:
   Enabled: false
@@ -24,6 +15,4 @@ FrozenStringLiteralComment:
 LineLength:
   Max: 175
 MethodLength:
-  Enabled: false
-ModuleLength:
-  Enabled: false
+  Max: 20
