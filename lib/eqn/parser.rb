@@ -5,7 +5,7 @@ module Eqn
         parser = EqnParser.new
 
         # Pass the data over to the parser instance.
-        tree = parser.parse(data.downcase)
+        tree = parser.parse(data)
 
         # Raise any errors.
         raise ParseError, "Parse error at offset: #{parser.index} -- #{parser.failure_reason}" if tree.nil?
