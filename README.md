@@ -128,7 +128,7 @@ Rounds the number down (i.e. floor function). Optionally, pass a number of decim
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
 
-The gem uses rspec for testing; run `rspec` from the application root to execute the tests.
+The gem uses rspec for testing and appraisal to test against multiple versions of treetop (the only runtime dependency). From the command line, run `bundle exec appraisal install` to install gems and `bundle exec appraisal rspec` to run the complete test suite. (You can still run `bundle exec rspec` to only test against the latest version of treetop while developing.)
 
 ## Authorship
 
@@ -136,7 +136,7 @@ Written by Zach Schneider for [Aha!, the world's #1 product roadmap software](ht
 
 ## Contributing
 
-1. Fork it ( https://github.com/schneidmaster/eqn/fork )
+1. Fork it ([https://github.com/schneidmaster/eqn/fork](https://github.com/schneidmaster/eqn/fork))
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
