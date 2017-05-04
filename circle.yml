@@ -6,3 +6,5 @@ test:
   override:
     - bundle exec appraisal rspec
     - bundle exec rubocop
+  post:
+    - bundle exec codeclimate-test-reporter
