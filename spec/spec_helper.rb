@@ -4,7 +4,7 @@ if ENV['CIRCLE_ARTIFACTS']
 else
   require 'simplecov'
   SimpleCov.start do
-    add_filter '/workers/'
+    add_filter 'lib/eqn/engine.rb'
   end
 end
 

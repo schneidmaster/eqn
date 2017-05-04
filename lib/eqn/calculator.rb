@@ -25,7 +25,7 @@ module Eqn
       end
     end
 
-    def respond_to_missing?(method)
+    def respond_to_missing?(method, _p2 = false)
       %i[calculate calc valid?].include?(method) || method.to_s.match(/^[A-Za-z]+=$/) || (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
     end
 

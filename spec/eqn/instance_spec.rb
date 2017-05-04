@@ -94,10 +94,14 @@ describe Eqn do
   end
 
   describe 'instance with vars' do
-    subject { Eqn::Calculator.new('variable + 1', variable: 3).calc }
+    subject { Eqn::Calculator.new('variable + 1', variable: 3) }
 
     it 'evaluates variables in arithmetic' do
-      expect(subject).to eq(4.0)
+      expect(subject.calc).to eq(4.0)
+    end
+
+    it 'responds to var name' do
+      expect(subject.respond_to?(:variable)).to eq(true)
     end
   end
 end
