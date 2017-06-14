@@ -16,21 +16,21 @@ module Eqn
 
       private
 
-      def clean_tree(root_node)
+      def clean_tree(node)
         # Delete cruft syntax nodes.
-        root_node.elements.delete_if(&method(:syntax_node?))
+        node.elements.delete_if(&method(:syntax_node?))
 
         # Recurse over any elements with their own children.
-        root_node.elements.reject(&method(:empty?)).each(&method(:clean_tree))
+        node.elements.reject(&method(:leaf_node?)).each(&method(:clean_tree))
 
-        root_node
+        node
       end
 
       def syntax_node?(node)
         node.instance_of?(Treetop::Runtime::SyntaxNode)
       end
 
-      def empty?(node)
+      def leaf_node?(node)
         node.elements.nil?
       end
     end
