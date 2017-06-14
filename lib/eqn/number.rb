@@ -7,7 +7,7 @@ module Eqn
 
       if instance_of?(Float)
         # Apply any decimal if a float.
-        base + elements.shift.value(vars) if instance_of?(Float)
+        base + elements.shift.value(vars)
       else
         # Apply any exponent if a simple number.
         base * elements.shift.value(vars)
