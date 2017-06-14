@@ -2,9 +2,18 @@ module Eqn
   class Number < Treetop::Runtime::SyntaxNode
     def value(vars = {})
       base = elements.shift.value(vars)
-      # Apply any exponent.
-      base *= elements.shift.value(vars) unless elements.empty?
-      base
+
+      return base if elements.empty?
+
+      if instance_of?(Number)
+        # Apply any exponent if a simple number.
+        base * elements.shift.value(vars)
+      elsif instance_of?(Float)
+        # Apply any decimal if a float.
+        base + elements.shift.value(vars) if instance_of?(Float)
+      else
+        base
+      end
     end
 
     class SignedNumber < Treetop::Runtime::SyntaxNode
@@ -20,16 +29,7 @@ module Eqn
       end
     end
 
-    class Float < Treetop::Runtime::SyntaxNode
-      def value(vars = {})
-        base = elements.shift.value(vars)
-
-        # Add any decimal.
-        base += elements.shift.value(vars) unless elements.empty?
-
-        base
-      end
-    end
+    class Float < Number; end
 
     class Decimal < Treetop::Runtime::SyntaxNode
       def value(_vars = {})
