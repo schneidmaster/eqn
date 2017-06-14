@@ -3,7 +3,7 @@ AllCops:
     - vendor/**/*
 
 AbcSize:
-  Max: 25
+  Max: 20
 BlockLength:
   Enabled: false
 Documentation:
