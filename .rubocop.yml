@@ -3,7 +3,7 @@ AllCops:
     - vendor/**/*
 
 AbcSize:
-  Enabled: false
+  Max: 25
 BlockLength:
   Enabled: false
 Documentation:
@@ -14,5 +14,3 @@ FrozenStringLiteralComment:
   Enabled: false
 LineLength:
   Max: 175
-MethodLength:
-  Max: 20
