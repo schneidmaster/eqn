@@ -1,16 +1,15 @@
 AllCops:
   Exclude:
+    - eqn.gemspec
+    - Appraisals
     - vendor/**/*
 
-AbcSize:
-  Max: 20
-BlockLength:
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+Metrics/LineLength:
+  Max: 120
+Style/Documentation:
   Enabled: false
-Documentation:
+Style/FrozenStringLiteralComment:
   Enabled: false
-FileName:
-  Enabled: false
-FrozenStringLiteralComment:
-  Enabled: false
-LineLength:
-  Max: 175

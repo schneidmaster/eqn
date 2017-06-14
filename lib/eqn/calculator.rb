@@ -13,7 +13,7 @@ module Eqn
       end
     end
 
-    def method_missing(method, *args)
+    def method_missing(method, *args) # rubocop:disable AbcSize
       if %i[calculate calc valid?].include?(method)
         self.class.send(method, @eqn, @vars)
       elsif (match = method.to_s.match(/^[A-Za-z]+=$/))
@@ -26,7 +26,9 @@ module Eqn
     end
 
     def respond_to_missing?(method, _p2 = false)
-      %i[calculate calc valid?].include?(method) || method.to_s.match(/^[A-Za-z]+=$/) || (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
+      %i[calculate calc valid?].include?(method) ||
+        method.to_s.match(/^[A-Za-z]+=$/) ||
+        (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
     end
 
     class << self
