@@ -9,7 +9,7 @@ module Eqn
       if key_or_hash.is_a?(Hash)
         @vars.merge!(key_or_hash)
       else
-        @vars[key_or_hash.intern] = value
+        @vars[key_or_hash.to_sym] = value
       end
     end
 
@@ -17,8 +17,8 @@ module Eqn
       if %i[calculate calc valid?].include?(method)
         self.class.send(method, @eqn, @vars)
       elsif (match = method.to_s.match(/^[A-Za-z]+=$/))
-        @vars[match.to_s.delete('=').intern] = args.first
-      elsif (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
+        @vars[match.to_s.delete('=').to_sym] = args.first
+      elsif (var = method.to_s.match(/^[A-Za-z]+$/).to_s.to_sym) && @vars.key?(var)
         @vars[var]
       else
         super
@@ -28,7 +28,7 @@ module Eqn
     def respond_to_missing?(method, _p2 = false)
       %i[calculate calc valid?].include?(method) ||
         method.to_s.match(/^[A-Za-z]+=$/) ||
-        (var = method.to_s.match(/^[A-Za-z]+$/).to_s.intern) && @vars.key?(var)
+        (var = method.to_s.match(/^[A-Za-z]+$/).to_s.to_sym) && @vars.key?(var)
     end
 
     class << self
