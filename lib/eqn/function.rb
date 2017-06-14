@@ -17,9 +17,15 @@ module Eqn
         if elements.empty?
           value.send(fn)
         else
-          decimals = elements.shift.value(vars)
-          (value * 10**decimals).send(fn).to_f / 10**decimals
+          round_to_precision(fn, vars, value)
         end
+      end
+
+      private
+
+      def round_to_precision(fn, vars, value)
+        decimals = elements.shift.value(vars)
+        (value * 10**decimals).send(fn).to_f / 10**decimals
       end
     end
 
