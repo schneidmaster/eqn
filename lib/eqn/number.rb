@@ -5,16 +5,16 @@ module Eqn
 
       return base if elements.empty?
 
-      if instance_of?(Number)
-        # Apply any exponent if a simple number.
-        base * elements.shift.value(vars)
-      elsif instance_of?(Float)
+      if instance_of?(Float)
         # Apply any decimal if a float.
         base + elements.shift.value(vars) if instance_of?(Float)
       else
-        base
+        # Apply any exponent if a simple number.
+        base * elements.shift.value(vars)
       end
     end
+
+    class Float < Number; end
 
     class SignedNumber < Treetop::Runtime::SyntaxNode
       def value(vars = {})
@@ -28,8 +28,6 @@ module Eqn
         sign_negative ? -value : value
       end
     end
-
-    class Float < Number; end
 
     class Decimal < Treetop::Runtime::SyntaxNode
       def value(_vars = {})
