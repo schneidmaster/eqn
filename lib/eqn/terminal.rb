@@ -1,5 +1,6 @@
 module Eqn
   module Terminal
+    # Node class for a variable.
     class Variable < Treetop::Runtime::SyntaxNode
       def value(vars = {})
         val = vars[text_value.to_sym]
@@ -9,6 +10,7 @@ module Eqn
       end
     end
 
+    # Node class for a group of numbers.
     class Digits < Treetop::Runtime::SyntaxNode
       def dec_value
         ".#{text_value}".to_f
@@ -19,12 +21,14 @@ module Eqn
       end
     end
 
+    # Node class for a number sign.
     class Sign < Treetop::Runtime::SyntaxNode
       def negative?
         text_value == '-'
       end
     end
 
+    # Node class for an operator.
     class Op < Treetop::Runtime::SyntaxNode
       def left_associative?
         is_a? LeftAssociativeOp
@@ -38,6 +42,7 @@ module Eqn
       class RightAssociativeOp < Op; end
     end
 
+    # Node class for a comparation operator.
     class CompOp < Treetop::Runtime::SyntaxNode
       def value(_vars = {})
         text_value == '=' ? :== : text_value.to_sym

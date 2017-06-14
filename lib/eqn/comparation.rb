@@ -1,4 +1,5 @@
 module Eqn
+  # Node class for a comparison between expressions.
   class Comparation < Treetop::Runtime::SyntaxNode
     def value(vars = {})
       val_one = elements.shift.value(vars)
@@ -9,6 +10,7 @@ module Eqn
       end
     end
 
+    # Node class for the operator and expression being compared.
     class CompGroup < Treetop::Runtime::SyntaxNode
       def value(vars = {})
         [elements.shift.value(vars), elements.shift.value(vars)]

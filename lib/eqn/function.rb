@@ -1,5 +1,6 @@
 module Eqn
   module Function
+    # Node class for the if function.
     class If < Treetop::Runtime::SyntaxNode
       def value(vars = {})
         comp_val = elements.shift.value(vars)
@@ -10,6 +11,7 @@ module Eqn
       end
     end
 
+    # Base node class for round functions.
     class RoundBase < Treetop::Runtime::SyntaxNode
       def value(fn, vars)
         value = elements.shift.value(vars)
@@ -29,18 +31,21 @@ module Eqn
       end
     end
 
+    # Node class for the round function.
     class Round < RoundBase
       def value(vars = {})
         super(:round, vars)
       end
     end
 
+    # Node class for the roundup function.
     class RoundUp < RoundBase
       def value(vars = {})
         super(:ceil, vars)
       end
     end
 
+    # Node class for the rounddown function.
     class RoundDown < RoundBase
       def value(vars = {})
         super(:floor, vars)

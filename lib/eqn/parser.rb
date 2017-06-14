@@ -1,11 +1,12 @@
 module Eqn
+  # Primary parser class to convert a string equation to a tree of nodes.
   class Parser
     class << self
-      def parse(data)
+      def parse(equation)
         parser = EqnParser.new
 
-        # Pass the data over to the parser instance.
-        tree = parser.parse(data)
+        # Pass the equation over to the parser instance.
+        tree = parser.parse(equation)
 
         # Raise any errors.
         raise ParseError, "Parse error at offset: #{parser.index} -- #{parser.failure_reason}" if tree.nil?

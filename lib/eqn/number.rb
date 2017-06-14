@@ -1,4 +1,5 @@
 module Eqn
+  # Node class for a simple number.
   class Number < Treetop::Runtime::SyntaxNode
     def value(vars = {})
       base = elements.shift.value(vars)
@@ -16,6 +17,7 @@ module Eqn
 
     class Float < Number; end
 
+    # Node class for a signed number.
     class SignedNumber < Treetop::Runtime::SyntaxNode
       def value(vars = {})
         # Store sign if any.
@@ -29,12 +31,14 @@ module Eqn
       end
     end
 
+    # Node class for the decimal part of a non-integer.
     class Decimal < Treetop::Runtime::SyntaxNode
       def value(_vars = {})
         elements.shift.dec_value
       end
     end
 
+    # Node class for the exponent part of a number.
     class Exponent < Treetop::Runtime::SyntaxNode
       def value(vars = {})
         10**elements.shift.value(vars)

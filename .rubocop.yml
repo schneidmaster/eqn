@@ -9,8 +9,6 @@ Metrics/BlockLength:
     - spec/**/*
 Metrics/LineLength:
   Max: 120
-Style/Documentation:
-  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/PercentLiteralDelimiters:

@@ -1,4 +1,5 @@
 module Eqn
+  # Node class for an expression.
   class Expression < Treetop::Runtime::SyntaxNode
     def left_associative?
       elements.any? && elements.last.left_associative?
@@ -43,6 +44,7 @@ module Eqn
       base.send(op, num_expr_operand.value(vars))
     end
 
+    # Node class for the operator and latter component of an expression.
     class ExprGroup < Treetop::Runtime::SyntaxNode
       def left_associative?
         elements.first.left_associative?

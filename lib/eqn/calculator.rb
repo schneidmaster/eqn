@@ -1,4 +1,5 @@
 module Eqn
+  # Primary calculator class used for performing calculations or creating eqn instances.
   class Calculator
     def initialize(eqn, vars = {})
       @eqn = eqn
