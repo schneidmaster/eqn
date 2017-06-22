@@ -6,33 +6,15 @@ module Eqn
         parser = EqnParser.new
 
         # Pass the equation over to the parser instance.
-        tree = parser.parse(equation)
+        root_node = parser.parse(equation)
 
         # Raise any errors.
-        raise ParseError, "Parse error at offset: #{parser.index} -- #{parser.failure_reason}" if tree.nil?
+        raise ParseError, "Parse error at offset: #{parser.index} -- #{parser.failure_reason}" if root_node.nil?
 
         # Remove extraneous nodes and return tree.
-        clean_tree(tree)
-      end
+        root_node.clean_tree!
 
-      private
-
-      def clean_tree(node)
-        # Delete cruft syntax nodes.
-        node.elements.delete_if(&method(:syntax_node?))
-
-        # Recurse over any elements with their own children.
-        node.elements.reject(&method(:leaf_node?)).each(&method(:clean_tree))
-
-        node
-      end
-
-      def syntax_node?(node)
-        node.instance_of?(Treetop::Runtime::SyntaxNode)
-      end
-
-      def leaf_node?(node)
-        node.elements.nil?
+        root_node
       end
     end
   end

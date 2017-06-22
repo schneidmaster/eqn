@@ -1,7 +1,7 @@
 module Eqn
   module Function
     # Node class for the if function.
-    class If < Treetop::Runtime::SyntaxNode
+    class If < EqnNode
       def value(vars = {})
         comp_val = elements.shift.value(vars)
         ls = elements.shift.value(vars)
@@ -12,7 +12,7 @@ module Eqn
     end
 
     # Base node class for round functions.
-    class RoundBase < Treetop::Runtime::SyntaxNode
+    class RoundBase < EqnNode
       def value(fn, vars)
         value = elements.shift.value(vars)
         raise ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)

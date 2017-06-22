@@ -1,5 +1,5 @@
-module Eqn # :nodoc:
-  if defined? Rails
+if defined?(Rails)
+  module Eqn
     # Engine to autoload eqn in a Rails environment.
     class Engine < ::Rails::Engine
       initializer 'eqn' do

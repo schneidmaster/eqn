@@ -1,7 +1,7 @@
 module Eqn
   module Terminal
     # Node class for a variable.
-    class Variable < Treetop::Runtime::SyntaxNode
+    class Variable < EqnNode
       def value(vars = {})
         val = vars[text_value.to_sym]
         raise NoVariableValueError, "No value given for: #{text_value}" unless val
@@ -11,7 +11,7 @@ module Eqn
     end
 
     # Node class for a group of numbers.
-    class Digits < Treetop::Runtime::SyntaxNode
+    class Digits < EqnNode
       def dec_value
         ".#{text_value}".to_f
       end
@@ -22,14 +22,14 @@ module Eqn
     end
 
     # Node class for a number sign.
-    class Sign < Treetop::Runtime::SyntaxNode
+    class Sign < EqnNode
       def negative?
         text_value == '-'
       end
     end
 
     # Node class for an operator.
-    class Op < Treetop::Runtime::SyntaxNode
+    class Op < EqnNode
       def left_associative?
         is_a? LeftAssociativeOp
       end
@@ -43,7 +43,7 @@ module Eqn
     end
 
     # Node class for a comparation operator.
-    class CompOp < Treetop::Runtime::SyntaxNode
+    class CompOp < EqnNode
       def value(_vars = {})
         text_value == '=' ? :== : text_value.to_sym
       end
