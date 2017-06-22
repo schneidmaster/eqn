@@ -3,7 +3,7 @@ module Eqn
   class Comparation < EqnNode
     def value(vars = {})
       val_one = elements.shift.value(vars)
-      if elements.empty?
+      if term?
         val_one
       else
         val_one.send(*elements.shift.value(vars))

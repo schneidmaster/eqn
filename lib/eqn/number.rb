@@ -4,7 +4,7 @@ module Eqn
     def value(vars = {})
       base = elements.shift.value(vars)
 
-      return base if elements.empty?
+      return base if term?
 
       if instance_of?(Float)
         # Apply any decimal if a float.

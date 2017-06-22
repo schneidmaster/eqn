@@ -13,43 +13,37 @@ module Eqn
 
     # Base node class for round functions.
     class RoundBase < EqnNode
-      def value(fn, vars)
+      def value(vars)
         value = elements.shift.value(vars)
         raise ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
-        if elements.empty?
-          value.send(fn)
+        if term?
+          value.send(self.class::ROUND_METHOD)
         else
-          round_to_precision(fn, vars, value)
+          round_to_precision(vars, value)
         end
       end
 
       private
 
-      def round_to_precision(fn, vars, value)
+      def round_to_precision(vars, value)
         decimals = elements.shift.value(vars)
-        (value * 10**decimals).send(fn).to_f / 10**decimals
+        (value * 10**decimals).send(self.class::ROUND_METHOD).to_f / 10**decimals
       end
     end
 
     # Node class for the round function.
     class Round < RoundBase
-      def value(vars = {})
-        super(:round, vars)
-      end
+      ROUND_METHOD = :round
     end
 
     # Node class for the roundup function.
     class RoundUp < RoundBase
-      def value(vars = {})
-        super(:ceil, vars)
-      end
+      ROUND_METHOD = :ceil
     end
 
     # Node class for the rounddown function.
     class RoundDown < RoundBase
-      def value(vars = {})
-        super(:floor, vars)
-      end
+      ROUND_METHOD = :floor
     end
   end
 end
