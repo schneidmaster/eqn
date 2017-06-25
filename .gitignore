@@ -3,3 +3,4 @@ coverage
 Gemfile.lock
 pkg
 gemfiles/*.lock
+lib/grammar/eqn.rb

@@ -130,6 +130,10 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 The gem uses rspec for testing and appraisal to test against multiple versions of treetop (the only runtime dependency). From the command line, run `bundle exec appraisal install` to install gems and `bundle exec appraisal rspec` to run the complete test suite. (You can still run `bundle exec rspec` to only test against the latest version of treetop while developing.)
 
+## Release
+
+Before publishing, run `bin/compile` to precompile ruby source code for the parser. This will automatically be used by the gem if present, and provides a small performance increase over generating the source code at runtime.
+
 ## Authorship
 
 Written by Zach Schneider for [Aha!, the world's #1 product roadmap software](http://www.aha.io/)
