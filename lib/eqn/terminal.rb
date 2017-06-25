@@ -5,7 +5,7 @@ module Eqn
       def value(vars = {})
         val = vars[text_value.to_sym]
         raise NoVariableValueError, "No value given for: #{text_value}" unless val
-        raise NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{val}" unless val.is_a? Numeric
+        raise NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{val}" unless val.is_a?(Numeric)
         val
       end
     end
@@ -31,7 +31,7 @@ module Eqn
     # Node class for an operator.
     class Op < EqnNode
       def left_associative?
-        is_a? LeftAssociativeOp
+        is_a?(LeftAssociativeOp)
       end
 
       def value(_vars = {})

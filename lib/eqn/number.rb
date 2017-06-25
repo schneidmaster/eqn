@@ -21,7 +21,7 @@ module Eqn
     class SignedNumber < EqnNode
       def value(vars = {})
         # Store sign if any.
-        sign_negative = elements.shift.negative? if elements.first.is_a? Terminal::Sign
+        sign_negative = elements.shift.negative? if elements.first.is_a?(Terminal::Sign)
 
         # Evaluate float.
         value = elements.shift.value(vars)
