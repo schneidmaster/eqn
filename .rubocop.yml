@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - eqn.gemspec
     - Appraisals
+    - lib/grammar/eqn.rb
     - vendor/**/*
 
 Metrics/BlockLength:

@@ -1,6 +1,7 @@
 dependencies:
   post:
     - bundle exec appraisal install
+    - bin/compile
 
 test:
   override:

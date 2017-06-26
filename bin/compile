@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require 'treetop'
+compiler = Treetop::Compiler::GrammarCompiler.new
+compiler.compile(File.join(__dir__, '..', 'lib', 'grammar', 'eqn.treetop'))
