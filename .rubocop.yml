@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 AllCops:
   Exclude:
     - eqn.gemspec
@@ -5,10 +7,9 @@ AllCops:
     - vendor/**/*
 
 Metrics/BlockLength:
-  Exclude:
-    - spec/**/*
+  ExcludedMethods: ['describe', 'context']
 Metrics/LineLength:
-  Max: 120
+  Max: 130
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/PercentLiteralDelimiters:

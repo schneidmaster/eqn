@@ -5,3 +5,5 @@ end
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'eqn'
+
+require_relative 'support/shared_examples'

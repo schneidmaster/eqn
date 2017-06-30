@@ -1,45 +1,43 @@
 describe Eqn do
-  context 'compares expressions' do
-    it 'compares two numbers with >' do
-      expect(Eqn::Calculator.calc('2 > 1')).to eq(true)
-      expect(Eqn::Calculator.calc('1 > 2')).to eq(false)
-    end
+  context 'when comparing two numbers with >' do
+    it_behaves_like 'correctly evaluates', eqn: '2 > 1', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '1 > 2', expected_result: false
+  end
 
-    it 'compares two numbers with <' do
-      expect(Eqn::Calculator.calc('1 < 2')).to eq(true)
-      expect(Eqn::Calculator.calc('2 < 1')).to eq(false)
-    end
+  context 'when comparing two numbers with <' do
+    it_behaves_like 'correctly evaluates', eqn: '1 < 2', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '2 < 1', expected_result: false
+  end
 
-    it 'compares two numbers with >=' do
-      expect(Eqn::Calculator.calc('2 >= 1')).to eq(true)
-      expect(Eqn::Calculator.calc('2 >= 2')).to eq(true)
-      expect(Eqn::Calculator.calc('1 >= 2')).to eq(false)
-    end
+  context 'when comparing two numbers with >=' do
+    it_behaves_like 'correctly evaluates', eqn: '2 >= 1', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '2 >= 2', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '1 >= 2', expected_result: false
+  end
 
-    it 'compares two numbers with <=' do
-      expect(Eqn::Calculator.calc('1 <= 2')).to eq(true)
-      expect(Eqn::Calculator.calc('2 <= 2')).to eq(true)
-      expect(Eqn::Calculator.calc('2 <= 1')).to eq(false)
-    end
+  context 'when comparing two numbers with <=' do
+    it_behaves_like 'correctly evaluates', eqn: '1 <= 2', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '2 <= 2', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '2 <= 1', expected_result: false
+  end
 
-    it 'compares two numbers with =' do
-      expect(Eqn::Calculator.calc('1 = 1')).to eq(true)
-      expect(Eqn::Calculator.calc('1 = 2')).to eq(false)
-    end
+  context 'when comparing two numbers with =' do
+    it_behaves_like 'correctly evaluates', eqn: '1 = 1', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '1 = 2', expected_result: false
+  end
 
-    it 'compares two numbers with ==' do
-      expect(Eqn::Calculator.calc('1 == 1')).to eq(true)
-      expect(Eqn::Calculator.calc('1 == 2')).to eq(false)
-    end
+  context 'when comparing two numbers with ==' do
+    it_behaves_like 'correctly evaluates', eqn: '1 == 1', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '1 == 2', expected_result: false
+  end
 
-    it 'compares two numbers with !=' do
-      expect(Eqn::Calculator.calc('2 != 1')).to eq(true)
-      expect(Eqn::Calculator.calc('2 != 2')).to eq(false)
-    end
+  context 'when comparing two numbers with !=' do
+    it_behaves_like 'correctly evaluates', eqn: '2 != 1', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '2 != 2', expected_result: false
+  end
 
-    it 'compares two groups' do
-      expect(Eqn::Calculator.calc('(2 + 2) > (2 + 1)')).to eq(true)
-      expect(Eqn::Calculator.calc('(2 + 1) > (2 + 2)')).to eq(false)
-    end
+  context 'when comparing two groups' do
+    it_behaves_like 'correctly evaluates', eqn: '(2 + 2) > (2 + 1)', expected_result: true
+    it_behaves_like 'correctly evaluates', eqn: '(2 + 1) > (2 + 2)', expected_result: false
   end
 end
