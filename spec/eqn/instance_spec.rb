@@ -45,6 +45,26 @@ describe Eqn do
     end
   end
 
+  describe 'validity' do
+    subject { Eqn::Calculator.new(eqn).valid? }
+
+    context 'with valid equation' do
+      let(:eqn) { '1+1' }
+
+      it 'affirms validity' do
+        expect(subject).to eq(true)
+      end
+    end
+
+    context 'with invalid equation' do
+      let(:eqn) { '1 / /' }
+
+      it 'refutes validity' do
+        expect(subject).to eq(false)
+      end
+    end
+  end
+
   context 'sets var after initialization' do
     subject { Eqn::Calculator.new('abc+1') }
 
@@ -93,7 +113,7 @@ describe Eqn do
     end
   end
 
-  describe 'instance with vars' do
+  context 'instance with vars' do
     subject { Eqn::Calculator.new('variable + 1', variable: 3) }
 
     it 'evaluates variables in arithmetic' do
