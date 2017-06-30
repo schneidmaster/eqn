@@ -1,127 +1,125 @@
 describe Eqn do
-  context 'performs basic arithmetic' do
-    it 'performs basic addition' do
-      expect(Eqn::Calculator.calc('1+1')).to eq(2)
-      expect(Eqn::Calculator.calc('3+-1')).to eq(2)
-      expect(Eqn::Calculator.calc('-3+1')).to eq(-2)
-      expect(Eqn::Calculator.calc('-3+-1')).to eq(-4)
+  context 'when performing basic addition' do
+    it_behaves_like 'correctly evaluates', eqn: '1+1', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '3+-1', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '-3+1', expected_result: -2
+    it_behaves_like 'correctly evaluates', eqn: '-3+-1', expected_result: -4
+  end
+
+  context 'when performing basic subtraction' do
+    it_behaves_like 'correctly evaluates', eqn: '5-3', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '5--3', expected_result: 8
+    it_behaves_like 'correctly evaluates', eqn: '-5-3', expected_result: -8
+    it_behaves_like 'correctly evaluates', eqn: '-5--3', expected_result: -2
+  end
+
+  context 'when performing basic multiplication' do
+    it_behaves_like 'correctly evaluates', eqn: '2*4', expected_result: 8
+    it_behaves_like 'correctly evaluates', eqn: '2*.4', expected_result: 0.8
+    it_behaves_like 'correctly evaluates', eqn: '2*-4', expected_result: -8
+    it_behaves_like 'correctly evaluates', eqn: '-2*4', expected_result: -8
+    it_behaves_like 'correctly evaluates', eqn: '-2*-4', expected_result: 8
+  end
+
+  context 'when performing basic division' do
+    it_behaves_like 'correctly evaluates', eqn: '10/5', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '10/-5', expected_result: -2
+    it_behaves_like 'correctly evaluates', eqn: '-10/5', expected_result: -2
+    it_behaves_like 'correctly evaluates', eqn: '-10/-5', expected_result: 2
+  end
+
+  context 'when performing basic exponentiation' do
+    it_behaves_like 'correctly evaluates', eqn: '2^3', expected_result: 8
+    it_behaves_like 'correctly evaluates', eqn: '2^-3', expected_result: 0.125
+    it_behaves_like 'correctly evaluates', eqn: '-2^3', expected_result: -8
+    it_behaves_like 'correctly evaluates', eqn: '-2^-3', expected_result: -0.125
+  end
+
+  context 'when evaluating order of operations' do
+    context 'performs multiplication before addition' do
+      it_behaves_like 'correctly evaluates', eqn: '1 + 2 * 3', expected_result: 7
+      it_behaves_like 'correctly evaluates', eqn: '2 * 2 + 3', expected_result: 7
     end
 
-    it 'performs basic subtraction' do
-      expect(Eqn::Calculator.calc('5-3')).to eq(2)
-      expect(Eqn::Calculator.calc('5--3')).to eq(8)
-      expect(Eqn::Calculator.calc('-5-3')).to eq(-8)
-      expect(Eqn::Calculator.calc('-5--3')).to eq(-2)
+    context 'performs multiplication before subtraction' do
+      it_behaves_like 'correctly evaluates', eqn: '10 - 2 * 3', expected_result: 4
+      it_behaves_like 'correctly evaluates', eqn: '10 * 2 - 3', expected_result: 17
     end
 
-    it 'performs basic multiplication' do
-      expect(Eqn::Calculator.calc('2*4')).to eq(8)
-      expect(Eqn::Calculator.calc('2*.4')).to eq(0.8)
-      expect(Eqn::Calculator.calc('2*-4')).to eq(-8)
-      expect(Eqn::Calculator.calc('-2*4')).to eq(-8)
-      expect(Eqn::Calculator.calc('-2*-4')).to eq(8)
+    context 'performs division before addition' do
+      it_behaves_like 'correctly evaluates', eqn: '1 + 6 / 3', expected_result: 3
+      it_behaves_like 'correctly evaluates', eqn: '6 / 3 + 1', expected_result: 3
     end
 
-    it 'performs basic division' do
-      expect(Eqn::Calculator.calc('10/5')).to eq(2)
-      expect(Eqn::Calculator.calc('10/-5')).to eq(-2)
-      expect(Eqn::Calculator.calc('-10/5')).to eq(-2)
-      expect(Eqn::Calculator.calc('-10/-5')).to eq(2)
+    context 'performs division before subtraction' do
+      it_behaves_like 'correctly evaluates', eqn: '4 - 6 / 3', expected_result: 2
+      it_behaves_like 'correctly evaluates', eqn: '6 / 3 - 1', expected_result: 1
     end
 
-    it 'performs basic exponentiation' do
-      expect(Eqn::Calculator.calc('2^3')).to eq(8)
-      expect(Eqn::Calculator.calc('2^-3')).to eq(0.125)
-      expect(Eqn::Calculator.calc('-2^3')).to eq(-8)
-      expect(Eqn::Calculator.calc('-2^-3')).to eq(-0.125)
+    context 'performs exponentiation before multiplication' do
+      it_behaves_like 'correctly evaluates', eqn: '2 ^ 2 * 3', expected_result: 12
+      it_behaves_like 'correctly evaluates', eqn: '3 * 2 ^ 2', expected_result: 12
+    end
+
+    context 'performs exponentiation before division' do
+      it_behaves_like 'correctly evaluates', eqn: '2 ^ 3 / 2', expected_result: 4
+      it_behaves_like 'correctly evaluates', eqn: '2 / 2 ^ 3', expected_result: 0.25
+    end
+
+    context 'performs exponentiation before addition' do
+      it_behaves_like 'correctly evaluates', eqn: '2 ^ 2 + 3', expected_result: 7
+      it_behaves_like 'correctly evaluates', eqn: '3 + 2 ^ 2', expected_result: 7
+    end
+
+    context 'performs exponentiation before subtraction' do
+      it_behaves_like 'correctly evaluates', eqn: '2 ^ 2 - 3', expected_result: 1
+      it_behaves_like 'correctly evaluates', eqn: '5 - 2 ^ 2', expected_result: 1
+    end
+
+    context 'performs parenthesized addition before multiplication' do
+      it_behaves_like 'correctly evaluates', eqn: '(2 + 2) * 3', expected_result: 12
+      it_behaves_like 'correctly evaluates', eqn: '3 * (2 + 2)', expected_result: 12
+    end
+
+    context 'performs parenthesized subtraction before multiplication' do
+      it_behaves_like 'correctly evaluates', eqn: '(5 - 2) * 3', expected_result: 9
+      it_behaves_like 'correctly evaluates', eqn: '3 * (5 - 2)', expected_result: 9
+    end
+
+    context 'performs parenthesized addition before division' do
+      it_behaves_like 'correctly evaluates', eqn: '(2 + 4) / 3', expected_result: 2
+      it_behaves_like 'correctly evaluates', eqn: '12 / (2 + 4)', expected_result: 2
+    end
+
+    context 'performs parenthesized subtraction before division' do
+      it_behaves_like 'correctly evaluates', eqn: '(8 - 2) / 3', expected_result: 2
+      it_behaves_like 'correctly evaluates', eqn: '12 / (8 - 2)', expected_result: 2
+    end
+
+    context 'performs parenthesized addition before exponentiation' do
+      it_behaves_like 'correctly evaluates', eqn: '(2 + 2) ^ 3', expected_result: 64
+      it_behaves_like 'correctly evaluates', eqn: '3 ^ (2 + 1)', expected_result: 27
+    end
+
+    context 'performs parenthesized subtraction before exponentiation' do
+      it_behaves_like 'correctly evaluates', eqn: '(5 - 2) ^ 3', expected_result: 27
+      it_behaves_like 'correctly evaluates', eqn: '3 ^ (5 - 2)', expected_result: 27
     end
   end
 
-  context 'respects order of operations' do
-    it 'performs multiplication before addition' do
-      expect(Eqn::Calculator.calc('1 + 2 * 3')).to eq(7)
-      expect(Eqn::Calculator.calc('2 * 2 + 3')).to eq(7)
+  context 'when evaluating associativity' do
+    context 'performs subtraction left-associatively' do
+      it_behaves_like 'correctly evaluates', eqn: '2 - 5 + 4', expected_result: 1
+      it_behaves_like 'correctly evaluates', eqn: '5 - 4 - 3', expected_result: -2
     end
 
-    it 'performs multiplication before subtraction' do
-      expect(Eqn::Calculator.calc('10 - 2 * 3')).to eq(4)
-      expect(Eqn::Calculator.calc('10 * 2 - 3')).to eq(17)
+    context 'performs division left-associatively' do
+      it_behaves_like 'correctly evaluates', eqn: '2 / 5 * 4', expected_result: 1.6
+      it_behaves_like 'correctly evaluates', eqn: '5 / 4 / 5', expected_result: 0.25
     end
 
-    it 'performs division before addition' do
-      expect(Eqn::Calculator.calc('1 + 6 / 3')).to eq(3)
-      expect(Eqn::Calculator.calc('6 / 3 + 1')).to eq(3)
-    end
-
-    it 'performs division before subtraction' do
-      expect(Eqn::Calculator.calc('4 - 6 / 3')).to eq(2)
-      expect(Eqn::Calculator.calc('6 / 3 - 1')).to eq(1)
-    end
-
-    it 'performs exponentiation before multiplication' do
-      expect(Eqn::Calculator.calc('2 ^ 2 * 3')).to eq(12)
-      expect(Eqn::Calculator.calc('3 * 2 ^ 2')).to eq(12)
-    end
-
-    it 'performs exponentiation before division' do
-      expect(Eqn::Calculator.calc('2 ^ 3 / 2')).to eq(4)
-      expect(Eqn::Calculator.calc('2 / 2 ^ 3')).to eq(0.25)
-    end
-
-    it 'performs exponentiation before addition' do
-      expect(Eqn::Calculator.calc('2 ^ 2 + 3')).to eq(7)
-      expect(Eqn::Calculator.calc('3 + 2 ^ 2')).to eq(7)
-    end
-
-    it 'performs exponentiation before subtraction' do
-      expect(Eqn::Calculator.calc('2 ^ 2 - 3')).to eq(1)
-      expect(Eqn::Calculator.calc('5 - 2 ^ 2')).to eq(1)
-    end
-
-    it 'performs parenthesized addition before multiplication' do
-      expect(Eqn::Calculator.calc('(2 + 2) * 3')).to eq(12)
-      expect(Eqn::Calculator.calc('3 * (2 + 2)')).to eq(12)
-    end
-
-    it 'performs parenthesized subtraction before multiplication' do
-      expect(Eqn::Calculator.calc('(5 - 2) * 3')).to eq(9)
-      expect(Eqn::Calculator.calc('3 * (5 - 2)')).to eq(9)
-    end
-
-    it 'performs parenthesized addition before division' do
-      expect(Eqn::Calculator.calc('(2 + 4) / 3')).to eq(2)
-      expect(Eqn::Calculator.calc('12 / (2 + 4)')).to eq(2)
-    end
-
-    it 'performs parenthesized subtraction before division' do
-      expect(Eqn::Calculator.calc('(8 - 2) / 3')).to eq(2)
-      expect(Eqn::Calculator.calc('12 / (8 - 2)')).to eq(2)
-    end
-
-    it 'performs parenthesized addition before exponentiation' do
-      expect(Eqn::Calculator.calc('(2 + 2) ^ 3')).to eq(64)
-      expect(Eqn::Calculator.calc('3 ^ (2 + 1)')).to eq(27)
-    end
-
-    it 'performs parenthesized subtraction before exponentiation' do
-      expect(Eqn::Calculator.calc('(5 - 2) ^ 3')).to eq(27)
-      expect(Eqn::Calculator.calc('3 ^ (5 - 2)')).to eq(27)
-    end
-  end
-
-  context 'respects associativity' do
-    it 'performs subtraction left-associatively' do
-      expect(Eqn::Calculator.calc('2 - 5 + 4')).to eq(1)
-      expect(Eqn::Calculator.calc('5 - 4 - 3')).to eq(-2)
-    end
-
-    it 'performs division left-associatively' do
-      expect(Eqn::Calculator.calc('2 / 5 * 4')).to eq(1.6)
-      expect(Eqn::Calculator.calc('5 / 4 / 5')).to eq(0.25)
-    end
-
-    it 'performs exponentiation right-associatively' do
-      expect(Eqn::Calculator.calc('2 ^ 3 ^ 2')).to eq(512)
+    context 'performs exponentiation right-associatively' do
+      it_behaves_like 'correctly evaluates', eqn: '2 ^ 3 ^ 2', expected_result: 512
     end
   end
 end

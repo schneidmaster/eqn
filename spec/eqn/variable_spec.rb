@@ -1,31 +1,29 @@
 describe Eqn do
-  context 'evaluates variables' do
-    it 'evaluates variables in arithmetic' do
-      expect(Eqn::Calculator.calc('a + 1', a: 1)).to eq(2)
-      expect(Eqn::Calculator.calc('-a * 5', a: 2)).to eq(-10)
-      expect(Eqn::Calculator.calc('-5 * a', a: 2)).to eq(-10)
-      expect(Eqn::Calculator.calc('3 * a', a: 2.5)).to eq(7.5)
-    end
+  context 'when evaluating variables in arithmetic' do
+    it_behaves_like 'correctly evaluates', eqn: 'a + 1', vars: { a: 1 }, expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '-a * 5', vars: { a: 2 }, expected_result: -10
+    it_behaves_like 'correctly evaluates', eqn: '-5 * a', vars: { a: 2 }, expected_result: -10
+    it_behaves_like 'correctly evaluates', eqn: '3 * a', vars: { a: 2.5 }, expected_result: 7.5
+  end
 
-    it 'evaluates variables in functions' do
-      expect(Eqn::Calculator.calc('if(a > b, c, d)', a: 2, b: 1, c: -5, d: 5)).to eq(-5)
-    end
+  context 'when variables are used in functions' do
+    it_behaves_like 'correctly evaluates', eqn: 'if(a > b, c, d)', vars: { a: 2, b: 1, c: -5, d: 5 }, expected_result: -5
+  end
 
-    it 'errors if variable used in wrong context' do
-      expect(Eqn::Calculator.valid?('a.1', a: 1)).to eq(false)
-      expect { Eqn::Calculator.calc('a.1', a: 1) }.to raise_error(Eqn::ParseError)
-    end
+  context 'when variable is used in wrong context' do
+    it_behaves_like 'correctly assesses validity', eqn: 'a.1', vars: { a: 1 }, expected_result: false
+    it_behaves_like 'correctly raises error', eqn: 'a.1', vars: { a: 1 }, expected_error: Eqn::ParseError
+  end
 
-    it 'errors if variable value is not numeric' do
-      expect(Eqn::Calculator.valid?('a + 1', a: 'string')).to eq(false)
-      expect { Eqn::Calculator.calc('a + 1', a: 'string') }.to raise_error(Eqn::NonNumericVariableError)
-      expect(Eqn::Calculator.valid?('a + 1', a: {})).to eq(false)
-      expect { Eqn::Calculator.calc('a + 1', a: {}) }.to raise_error(Eqn::NonNumericVariableError)
-    end
+  context 'when variable value is non-numeric' do
+    it_behaves_like 'correctly assesses validity', eqn: 'a + 1', vars: { a: 'string' }, expected_result: false
+    it_behaves_like 'correctly raises error', eqn: 'a + 1', vars: { a: 'string' }, expected_error: Eqn::NonNumericVariableError
+    it_behaves_like 'correctly assesses validity', eqn: 'a + 1', vars: { a: {} }, expected_result: false
+    it_behaves_like 'correctly raises error', eqn: 'a + 1', vars: { a: {} }, expected_error: Eqn::NonNumericVariableError
+  end
 
-    it 'errors if variable value not given' do
-      expect(Eqn::Calculator.valid?('a + 1')).to eq(false)
-      expect { Eqn::Calculator.calc('a + 1') }.to raise_error(Eqn::NoVariableValueError)
-    end
+  context 'when variable value not given' do
+    it_behaves_like 'correctly assesses validity', eqn: 'a + 1', expected_result: false
+    it_behaves_like 'correctly raises error', eqn: 'a + 1', expected_error: Eqn::NoVariableValueError
   end
 end
