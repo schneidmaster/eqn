@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/eqn
+    docker:
+      - image: circleci/ruby:2.3
+        environment:
+          GEM_HOME: ~/eqn/vendor/bundle
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "eqn.gemspec" }}
+      - run:
+          name: bundle-install
+          command: bundle check || bundle install --jobs=4 --retry=3 
+      - run:
+          name: appraisal-install
+          command: bundle exec appraisal install
+      - save_cache:
+          key: dependency-cache-{{ checksum "eqn.gemspec" }}
+          paths:
+            - ./vendor/bundle
+      - run:
+          name: appraisal-rspec
+          command: bundle exec appraisal rspec
+      - run:
+          name: rubocop
+          command: bundle exec rubocop
+      - run:
+          name: codeclimate
+          command: bundle exec codeclimate-test-reporter
+      
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
