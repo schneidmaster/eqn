@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Zach Schneider']
   spec.email         = ['zach@aha.io']
 
-  spec.summary       = 'A gem to evaluate numerical equations.'
-  spec.description   = 'A gem to evaluate numerical equations. Includes support for variables and functions.'
+  spec.summary       = 'A gem to evaluate mathematical equations.'
+  spec.description   = 'A gem to evaluate mathematical equations. Includes support for variables and functions.'
   spec.homepage      = 'https://github.com/schneidmaster/eqn'
   spec.license       = 'MIT'
 
