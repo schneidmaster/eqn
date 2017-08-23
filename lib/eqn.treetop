@@ -112,7 +112,8 @@ grammar Eqn
   end
 
   rule sign
-    '+' / '-' <Eqn::Terminal::Sign>
+      '+' 
+    / '-' <Eqn::Terminal::UnaryMinus>
   end
 
   rule digits

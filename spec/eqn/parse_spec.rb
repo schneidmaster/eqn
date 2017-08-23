@@ -3,12 +3,20 @@ describe Eqn do
     it_behaves_like 'correctly evaluates', eqn: '1', expected_result: 1
   end
 
+  context 'when parsing an explicitly signed positive integer' do
+    it_behaves_like 'correctly evaluates', eqn: '+1', expected_result: 1
+  end
+
   context 'when parsing a negative integer' do
     it_behaves_like 'correctly evaluates', eqn: '-1', expected_result: -1
   end
 
   context 'when parsing a positive float' do
     it_behaves_like 'correctly evaluates', eqn: '1.5', expected_result: 1.5
+  end
+
+  context 'when parsing an explicitly signed positive float' do
+    it_behaves_like 'correctly evaluates', eqn: '+1.5', expected_result: 1.5
   end
 
   context 'when parsing a negative float' do

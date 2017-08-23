@@ -35,6 +35,13 @@ describe Eqn do
     it_behaves_like 'correctly evaluates', eqn: '-2^-3', expected_result: -0.125
   end
 
+  context 'when evaluating explicitly signed positive integers' do
+    it_behaves_like 'correctly evaluates', eqn: '+1+1', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '+3+-1', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: '-3++1', expected_result: -2
+    it_behaves_like 'correctly evaluates', eqn: '-3+-1', expected_result: -4
+  end
+
   context 'when evaluating order of operations' do
     context 'performs multiplication before addition' do
       it_behaves_like 'correctly evaluates', eqn: '1 + 2 * 3', expected_result: 7

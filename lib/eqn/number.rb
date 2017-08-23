@@ -20,14 +20,14 @@ module Eqn
     # Node class for a signed number.
     class SignedNumber < EqnNode
       def value(vars = {})
-        # Store sign if any.
-        sign_negative = elements.shift.negative? if elements.first.is_a?(Terminal::Sign)
-
-        # Evaluate float.
-        value = elements.shift.value(vars)
-
-        # Apply sign if any.
-        sign_negative ? -value : value
+        first_element = elements.shift
+        # If first element is unary minus, negate the following value.
+        # Otherwise, simply return the positive value.
+        if first_element.is_a?(Terminal::UnaryMinus)
+          -elements.shift.value(vars)
+        else
+          first_element.value(vars)
+        end
       end
     end
 

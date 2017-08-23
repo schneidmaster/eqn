@@ -21,12 +21,8 @@ module Eqn
       end
     end
 
-    # Node class for a number sign.
-    class Sign < EqnNode
-      def negative?
-        text_value == '-'
-      end
-    end
+    # Node class for a unary minus.
+    class UnaryMinus < EqnNode; end
 
     # Node class for an operator.
     class Op < EqnNode
