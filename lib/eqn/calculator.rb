@@ -39,6 +39,7 @@ module Eqn
     def setter_key(method)
       match = method.to_s.match(/^[A-Za-z]+=$/)
       return unless match
+
       match.to_s.delete('=').to_sym
     end
 
@@ -49,8 +50,10 @@ module Eqn
     def getter_key(method)
       match = method.to_s.match(/^[A-Za-z]+$/)
       return if match.nil?
+
       key = match.to_s.to_sym
       return unless @vars.key?(key)
+
       key
     end
 
@@ -62,6 +65,7 @@ module Eqn
       def calculate(equation, vars = {})
         result = Parser.parse(equation).value(vars)
         raise ZeroDivisionError if result.is_a?(Float) && (result.abs == Float::INFINITY || result.nan?)
+
         result
       end
       alias calc calculate

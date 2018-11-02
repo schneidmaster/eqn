@@ -16,6 +16,7 @@ module Eqn
       def value(vars)
         value = elements.shift.value(vars)
         raise ZeroDivisionError if value.is_a?(Float) && (value.abs == Float::INFINITY || value.nan?)
+
         if term?
           value.send(self.class::ROUND_METHOD)
         else

@@ -19,12 +19,14 @@ module Eqn
 
     def consume_while_left_associative(base, vars)
       return base unless left_associative?
+
       base = apply_next_operator(base, vars)
       consume_while_left_associative(base, vars)
     end
 
     def apply_next_operator(base, vars)
       return base if term?
+
       left_associative = elements.last.left_associative?
       op, num_expr = elements.shift.value(vars)
       if left_associative
@@ -34,10 +36,10 @@ module Eqn
       end
     end
 
-    def apply_left_associative(base, vars, op, num_expr)
+    def apply_left_associative(base, vars, operator, num_expr)
       num_expr_operand = num_expr.elements.shift
       elements.push(num_expr.elements.shift) unless num_expr.term?
-      base.send(op, num_expr_operand.value(vars))
+      base.send(operator, num_expr_operand.value(vars))
     end
 
     # Node class for the operator and latter component of an expression.

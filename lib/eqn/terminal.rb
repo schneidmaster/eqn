@@ -6,6 +6,7 @@ module Eqn
         val = vars[text_value.to_sym]
         raise NoVariableValueError, "No value given for: #{text_value}" unless val
         raise NonNumericVariableError, "Variable #{text_value} value is nonnumeric: #{val}" unless val.is_a?(Numeric)
+
         val
       end
     end
