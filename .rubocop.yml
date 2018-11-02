@@ -16,3 +16,6 @@ Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     default: ()
     '%i': ()
+Style/StringLiterals:
+  Exclude:
+    - gemfiles/*
