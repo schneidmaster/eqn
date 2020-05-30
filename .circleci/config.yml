@@ -3,7 +3,7 @@ jobs:
   test:
     working_directory: ~/eqn
     docker:
-      - image: circleci/ruby:2.3
+      - image: circleci/ruby:2.6
         environment:
           GEM_HOME: ~/eqn/vendor/bundle
     steps:
