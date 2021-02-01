@@ -27,7 +27,7 @@ module Eqn
     end
 
     def respond_to_missing?(method, _include_private = false)
-      delegated_method?(method) || match_setter?(method) || match_getter?(method)
+      delegated_method?(method) || match_setter?(method) || match_getter?(method) || super
     end
 
     private
