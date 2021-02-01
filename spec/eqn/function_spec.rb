@@ -2,12 +2,14 @@ describe Eqn do
   context 'when evaluating the if function' do
     it_behaves_like 'correctly evaluates', eqn: 'if(5 > 3, 1, 2)', expected_result: 1
     it_behaves_like 'correctly evaluates', eqn: 'if(3 > 5, 1, 2)', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: 'IF(5 > 3, 1, 2)', expected_result: 1
   end
 
   context 'when evaluating the round function' do
     it_behaves_like 'correctly evaluates', eqn: 'round(1.75)', expected_result: 2
     it_behaves_like 'correctly evaluates', eqn: 'round(1.5)', expected_result: 2
     it_behaves_like 'correctly evaluates', eqn: 'round(1.25)', expected_result: 1
+    it_behaves_like 'correctly evaluates', eqn: 'ROUND(1.75)', expected_result: 2
   end
 
   context 'when evaluating the round function with decimals' do
@@ -15,12 +17,14 @@ describe Eqn do
     it_behaves_like 'correctly evaluates', eqn: 'round(1.74, 1)', expected_result: 1.7
     it_behaves_like 'correctly evaluates', eqn: 'round(1.7, 1)', expected_result: 1.7
     it_behaves_like 'correctly evaluates', eqn: 'round(1.7, 2)', expected_result: 1.7
+    it_behaves_like 'correctly evaluates', eqn: 'ROUND(1.75, 1)', expected_result: 1.8
   end
 
   context 'when evaluating the roundup function' do
     it_behaves_like 'correctly evaluates', eqn: 'roundup(1.75)', expected_result: 2
     it_behaves_like 'correctly evaluates', eqn: 'roundup(1.5)', expected_result: 2
     it_behaves_like 'correctly evaluates', eqn: 'roundup(1.25)', expected_result: 2
+    it_behaves_like 'correctly evaluates', eqn: 'ROUNDUP(1.75)', expected_result: 2
   end
 
   context 'when evaluating the roundup function with decimals' do
