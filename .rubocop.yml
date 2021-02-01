@@ -5,11 +5,12 @@ AllCops:
     - eqn.gemspec
     - Appraisals
     - vendor/**/*
+  NewCops: enable
 
+Layout/LineLength:
+  Max: 130
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
-Metrics/LineLength:
-  Max: 130
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/PercentLiteralDelimiters:

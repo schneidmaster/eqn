@@ -7,4 +7,4 @@ Treetop.load(File.join(__dir__, 'eqn.treetop'))
 require File.join(__dir__, 'eqn', 'eqn_node')
 
 # Load other eqn classes.
-Dir.glob File.join(__dir__, 'eqn', '**', '*.rb'), &method(:require)
+Dir.glob(File.join(__dir__, 'eqn', '**', '*.rb')).sort.each(&method(:require))

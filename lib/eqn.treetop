@@ -40,19 +40,19 @@ grammar Eqn
   end
 
   rule if_func
-    'if' space? '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
+    ('if' / 'IF') space? '(' comparation ',' expression ',' expression ')' <Eqn::Function::If>
   end
 
   rule round_func
-    'round' space? '(' expression round_group? ')' <Eqn::Function::Round>
+    ('round' / 'ROUND') space? '(' expression round_group? ')' <Eqn::Function::Round>
   end
 
   rule roundup_func
-    'roundup' space? '(' expression round_group? ')' <Eqn::Function::RoundUp>
+    ('roundup' / 'ROUNDUP') space? '(' expression round_group? ')' <Eqn::Function::RoundUp>
   end
 
   rule rounddown_func
-    'rounddown' space? '(' expression round_group? ')' <Eqn::Function::RoundDown>
+    ('rounddown' / 'ROUNDDOWN') space? '(' expression round_group? ')' <Eqn::Function::RoundDown>
   end
 
   rule round_group
